@@ -4,7 +4,7 @@ const pages = [
   ['Services', 'services.html'], ['Questions', 'questions.html'], ['Contact', 'contact.html']
 ];
 const current = location.pathname.split('/').pop() || 'index.html';
-const deployment = 'portfolio-2026-v7';
+const deployment = 'portfolio-2026-v7b';
 document.documentElement.style.overflowX = 'hidden';
 document.body.style.overflowX = 'hidden';
 if (current === 'collection.html' || current.startsWith('project-')) document.body.classList.add('collection-page');
@@ -40,7 +40,7 @@ if (current === 'project-one.html') document.querySelector('.gallery').innerHTML
 if (current === 'project-four.html') document.querySelector('.gallery').innerHTML = archiveImages('mono', 'mono', 109);
 if (current === 'filmmaking.html') {
   const bts = document.querySelector('.bts-grid');
-  if (bts) bts.innerHTML = Array.from({ length: 11 }, (_, index) => `<img class="fade" src="media/archive/bts/bts-${String(index + 1).padStart(3, '0')}.jpg" alt="Behind the scenes photograph ${index + 1}">`).join('');
+  if (bts) bts.innerHTML = Array.from({ length: 23 }, (_, index) => `<img class="fade" src="media/archive/bts/bts-${String(index + 1).padStart(3, '0')}.jpg" alt="Behind the scenes photograph ${index + 1}">`).join('');
 }
 
 const scripts = [
