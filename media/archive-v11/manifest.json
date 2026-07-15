@@ -1,0 +1,141 @@
+{
+  "color": [
+    {
+      "label": "Miscellaneous",
+      "slug": "misc",
+      "count": 9
+    },
+    {
+      "label": "Project 1",
+      "slug": "project-1",
+      "count": 6
+    },
+    {
+      "label": "Project 4",
+      "slug": "project-4",
+      "count": 9
+    },
+    {
+      "label": "Project 5",
+      "slug": "project-5",
+      "count": 3
+    },
+    {
+      "label": "Project 23",
+      "slug": "project-23",
+      "count": 4
+    },
+    {
+      "label": "Project 24",
+      "slug": "project-24",
+      "count": 4
+    },
+    {
+      "label": "Project 25",
+      "slug": "project-25",
+      "count": 8
+    },
+    {
+      "label": "Project 26",
+      "slug": "project-26",
+      "count": 4
+    },
+    {
+      "label": "Project 27",
+      "slug": "project-27",
+      "count": 9
+    },
+    {
+      "label": "Project 28",
+      "slug": "project-28",
+      "count": 2
+    }
+  ],
+  "mono": [
+    {
+      "label": "Miscellaneous",
+      "slug": "misc",
+      "count": 1
+    },
+    {
+      "label": "Project 2",
+      "slug": "project-2",
+      "count": 6
+    },
+    {
+      "label": "Project 6",
+      "slug": "project-6",
+      "count": 7
+    },
+    {
+      "label": "Project 7",
+      "slug": "project-7",
+      "count": 11
+    },
+    {
+      "label": "Project 8",
+      "slug": "project-8",
+      "count": 4
+    },
+    {
+      "label": "Project 9",
+      "slug": "project-9",
+      "count": 6
+    },
+    {
+      "label": "Project 10",
+      "slug": "project-10",
+      "count": 10
+    },
+    {
+      "label": "Project 11",
+      "slug": "project-11",
+      "count": 3
+    },
+    {
+      "label": "Project 13",
+      "slug": "project-13",
+      "count": 13
+    },
+    {
+      "label": "Project 14",
+      "slug": "project-14",
+      "count": 7
+    },
+    {
+      "label": "Project 15",
+      "slug": "project-15",
+      "count": 4
+    },
+    {
+      "label": "Project 17",
+      "slug": "project-17",
+      "count": 3
+    },
+    {
+      "label": "Project 18",
+      "slug": "project-18",
+      "count": 16
+    },
+    {
+      "label": "Project 19",
+      "slug": "project-19",
+      "count": 16
+    },
+    {
+      "label": "Project 20",
+      "slug": "project-20",
+      "count": 16
+    },
+    {
+      "label": "Project 21",
+      "slug": "project-21",
+      "count": 2
+    },
+    {
+      "label": "Project 22",
+      "slug": "project-22",
+      "count": 5
+    }
+  ]
+}
