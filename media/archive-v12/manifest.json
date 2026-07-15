@@ -2,11 +2,6 @@
   "archives": {
     "color": [
       {
-        "label": "Polaroids",
-        "slug": "polaroids",
-        "count": 9
-      },
-      {
         "label": "Project 1 — Trees",
         "slug": "project-1",
         "count": 5
@@ -45,6 +40,11 @@
         "label": "Project 28 — Chain Bike",
         "slug": "project-28",
         "count": 2
+      },
+      {
+        "label": "Polaroids",
+        "slug": "polaroids",
+        "count": 9
       },
       {
         "label": "Miscellaneous",
