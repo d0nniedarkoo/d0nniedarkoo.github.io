@@ -4,7 +4,7 @@
   ['Services', 'services.html'], ['Questions', 'questions.html'], ['Contact', 'contact.html']
 ];
 const current = location.pathname.split('/').pop() || 'index.html';
-const deployment = 'portfolio-2026-v19';
+const deployment = 'portfolio-2026-v20';
 const siteContent = window.PORTFOLIO_CONTENT || {};
 const escapeMarkup = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
 const safeExternalHref = value => { try { const url = new URL(value); return url.protocol === 'https:' ? url.href : '#'; } catch { return '#'; } };
@@ -222,10 +222,15 @@ const stopMediaDrag = event => { mediaZoom.dragging = false; mediaLightbox.class
 mediaLightboxImage.addEventListener('pointerup', stopMediaDrag);
 mediaLightboxImage.addEventListener('pointercancel', stopMediaDrag);
 mediaLightboxImage.addEventListener('dblclick', () => { mediaZoom.scale = mediaZoom.scale > 1 ? 1 : 2.5; mediaZoom.x = 0; mediaZoom.y = 0; applyMediaZoom(); });
+document.querySelectorAll('main h1, main h2, main h3, main p, main summary, main .credit-links, main .socials').forEach(element => {
+  if (!element.closest('.hero-copy') && !element.matches('.image-mark')) element.classList.add('text-reveal');
+});
 const reveal = new IntersectionObserver(entries => entries.forEach(entry => {
   if (entry.isIntersecting) { entry.target.classList.add('seen'); reveal.unobserve(entry.target); }
 }), { threshold: .06, rootMargin: '0px 0px 10% 0px' });
-document.querySelectorAll('.reveal, img.fade').forEach(el => reduce ? el.classList.add('seen') : reveal.observe(el));
+document.querySelectorAll('img.fade').forEach(image => image.classList.add('seen'));
+document.querySelectorAll('.reveal').forEach(element => element.classList.add('seen'));
+document.querySelectorAll('.text-reveal').forEach(element => reduce ? element.classList.add('seen') : reveal.observe(element));
 document.querySelectorAll('img:not(.hero img)').forEach(img => { img.loading = 'lazy'; img.decoding = 'async'; });
 
 document.querySelectorAll('.gallery').forEach(gallery => {
