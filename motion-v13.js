@@ -4,7 +4,7 @@
   ['Services', 'services.html'], ['Questions', 'questions.html'], ['Contact', 'contact.html']
 ];
 const current = location.pathname.split('/').pop() || 'index.html';
-const deployment = 'portfolio-2026-v24';
+const deployment = 'portfolio-2026-v25';
 const siteContent = window.PORTFOLIO_CONTENT || {};
 const escapeMarkup = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
 const safeExternalHref = value => { try { const url = new URL(value); return url.protocol === 'https:' ? url.href : '#'; } catch { return '#'; } };
@@ -253,9 +253,9 @@ const replayReveals = () => {
 };
 addEventListener('pageshow', replayReveals);
 document.querySelectorAll('.hero-birds i').forEach((bird,index) => {
-  const landingSets = index ? [[18,-3,-28,-9],[-22,11,30,-12],[42,6,-36,-6]] : [[0,0,34,-8],[-36,14,28,-11],[28,-10,40,7]];
+  const landingSets = index ? [[34,-3,-7,-1],[-38,8,9,-2],[12,15,-11,-1],[-25,-9,8,3]] : [[-34,1,8,-2],[31,8,-9,-2],[-12,16,10,-2],[22,-12,-8,3]];
   let cycle = Math.floor(Math.random()*landingSets.length);
-  const setLanding = () => { const [x,y,hx,hy] = landingSets[cycle++ % landingSets.length]; bird.style.setProperty('--land-x',`${x}px`); bird.style.setProperty('--land-y',`${y}px`); bird.style.setProperty('--hop-x',`${hx}px`); bird.style.setProperty('--hop-y',`${hy}px`); };
+  const setLanding = () => { const [x,y,hx,hy] = landingSets[cycle++ % landingSets.length]; bird.style.setProperty('--land-x',`${x}vw`); bird.style.setProperty('--land-y',`${y}vh`); bird.style.setProperty('--hop-x',`${hx}vw`); bird.style.setProperty('--hop-y',`${hy}vh`); };
   setLanding(); bird.addEventListener('animationiteration', setLanding);
 });
 document.querySelectorAll('img:not(.hero img)').forEach(img => { img.loading = 'lazy'; img.decoding = 'async'; });
