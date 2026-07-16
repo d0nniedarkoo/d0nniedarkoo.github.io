@@ -4,7 +4,7 @@
   ['Services', 'services.html'], ['Questions', 'questions.html'], ['Contact', 'contact.html']
 ];
 const current = location.pathname.split('/').pop() || 'index.html';
-const deployment = 'portfolio-2026-v21';
+const deployment = 'portfolio-2026-v22';
 const siteContent = window.PORTFOLIO_CONTENT || {};
 const escapeMarkup = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
 const safeExternalHref = value => { try { const url = new URL(value); return url.protocol === 'https:' ? url.href : '#'; } catch { return '#'; } };
@@ -139,7 +139,9 @@ if (current === 'filmmaking.html') {
 
 if (current === 'services.html' && siteContent.pages?.services) {
   const services = siteContent.pages.services;
-  const heading = document.querySelector('.collection-head h1');
+  const serviceHero = document.querySelector('.services-hero');
+  if (serviceHero && services.heroImage) serviceHero.style.setProperty('--image', `url('${services.heroImage.replace(/["'()]/g, '')}')`);
+  const heading = document.querySelector('.services-hero h1');
   if (heading) heading.innerHTML = escapeMarkup(services.heading).replace(/\n|\s+(?=[^\s]+$)/, '<br>');
   const grid = document.querySelector('.service-grid');
   if (grid) grid.innerHTML = services.items.map(item => `<article class="service-card reveal"><img class="fade" src="${escapeMarkup(item.image)}" alt="${escapeMarkup(item.title)}"><div><h2>${escapeMarkup(item.title)}</h2><p>${escapeMarkup(item.description)}</p></div></article>`).join('');
@@ -234,12 +236,16 @@ document.querySelectorAll('.text-reveal').forEach(element => {
 });
 const reveal = new IntersectionObserver(entries => entries.forEach(entry => {
   if (entry.isIntersecting) { entry.target.classList.add('seen'); reveal.unobserve(entry.target); }
-}), { threshold: .06, rootMargin: '0px 0px 10% 0px' });
+}), { threshold: .08, rootMargin: '0px 0px -8% 0px' });
 document.querySelectorAll('main img, main video').forEach(media => media.classList.add('media-reveal'));
 document.querySelectorAll('.page-hero, .contact-page, .filmmaking-profile, .home-grid a').forEach(surface => surface.classList.add('media-surface-reveal'));
 document.querySelectorAll('.reveal').forEach(element => element.classList.add('seen'));
-document.querySelectorAll('.text-reveal').forEach(element => reduce ? element.classList.add('seen') : reveal.observe(element));
-document.querySelectorAll('.media-reveal, .media-surface-reveal').forEach(element => reduce ? element.classList.add('seen') : reveal.observe(element));
+document.querySelectorAll('.home-grid h2').forEach((element,index) => element.style.setProperty('--reveal-delay', `${index * 120}ms`));
+const beginReveals = () => {
+  document.querySelectorAll('.text-reveal').forEach(element => reduce ? element.classList.add('seen') : reveal.observe(element));
+  document.querySelectorAll('.media-reveal, .media-surface-reveal').forEach(element => reduce ? element.classList.add('seen') : reveal.observe(element));
+};
+requestAnimationFrame(() => requestAnimationFrame(beginReveals));
 document.querySelectorAll('img:not(.hero img)').forEach(img => { img.loading = 'lazy'; img.decoding = 'async'; });
 
 document.querySelectorAll('.gallery').forEach(gallery => {
