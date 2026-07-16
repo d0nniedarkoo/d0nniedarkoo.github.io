@@ -203,3 +203,12 @@ body.loaded .hero-copy .hello{animation:hero-copy-arrive .85s .4s var(--ease) bo
 .hero-copy:has(.archive-title:hover,.directed-title:hover,.hello:hover){z-index:2;filter:drop-shadow(0 5px 18px rgba(0,0,0,.2))}
 .brand-logo{width:68px;height:68px;filter:drop-shadow(0 9px 12px rgba(0,0,0,.42))}
 @media(max-width:900px){.brand-logo{width:54px;height:54px;filter:drop-shadow(0 7px 9px rgba(0,0,0,.38))}}
+
+/* Cross-fade a duplicate text layer above the unchanged pole */
+.hero>.hero-foreground{opacity:1!important;filter:saturate(1.1) contrast(1.06) brightness(.92)!important;transition:none!important}
+.hero-copy:not(.hero-hover-copy){z-index:2}
+.hero-hover-copy{z-index:5;opacity:0;pointer-events:none;transition:opacity .95s cubic-bezier(.4,0,.2,1)!important;filter:drop-shadow(0 5px 18px rgba(0,0,0,.2))}
+.hero-hover-copy .archive-title,.hero-hover-copy .directed-title,.hero-hover-copy .hello{opacity:1!important;animation:none!important;pointer-events:none}
+.hero:has(.hero-copy:not(.hero-hover-copy) .archive-title:hover,.hero-copy:not(.hero-hover-copy) .directed-title:hover,.hero-copy:not(.hero-hover-copy) .hello:hover) .hero-hover-copy{opacity:1}
+.brand-logo{width:96px;height:78px;object-fit:contain;filter:none}
+@media(max-width:900px){.brand-logo{width:74px;height:60px;filter:none}}

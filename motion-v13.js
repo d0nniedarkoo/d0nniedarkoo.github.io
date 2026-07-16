@@ -4,7 +4,7 @@
   ['Services', 'services.html'], ['Questions', 'questions.html'], ['Contact', 'contact.html']
 ];
 const current = location.pathname.split('/').pop() || 'index.html';
-const deployment = 'portfolio-2026-v28';
+const deployment = 'portfolio-2026-v29';
 const siteContent = window.PORTFOLIO_CONTENT || {};
 const escapeMarkup = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
 const safeExternalHref = value => { try { const url = new URL(value); return url.protocol === 'https:' ? url.href : '#'; } catch { return '#'; } };
@@ -19,7 +19,7 @@ if (current === 'blog.html') document.body.classList.add('journal-page');
 document.body.insertAdjacentHTML('afterbegin', `
   <div class="loader" aria-hidden="true"><div><span>The Archive</span><i></i><small>Film · Photo · Story</small></div></div>
   <div class="grain" aria-hidden="true"></div>
-  <header class="site-header"><a class="brand" href="index.html"><img class="brand-logo" src="media/website-logo-v27.png" alt=""><span>The Archive</span></a>
+  <header class="site-header"><a class="brand" href="index.html"><img class="brand-logo" src="media/website-logo-shadow-v29.png" alt=""><span>The Archive</span></a>
     <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span><b>Menu</b></button>
     <nav id="main-nav">${pages.map(([name, url]) => `<a ${current === url ? 'class="active"' : ''} href="${url}">${name}</a>`).join('')}</nav>
   </header>
