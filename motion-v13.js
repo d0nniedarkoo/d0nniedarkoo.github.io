@@ -4,7 +4,7 @@
   ['Services', 'services.html'], ['Questions', 'questions.html'], ['Contact', 'contact.html']
 ];
 const current = location.pathname.split('/').pop() || 'index.html';
-const deployment = 'portfolio-2026-v23';
+const deployment = 'portfolio-2026-v24';
 const siteContent = window.PORTFOLIO_CONTENT || {};
 const escapeMarkup = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
 const safeExternalHref = value => { try { const url = new URL(value); return url.protocol === 'https:' ? url.href : '#'; } catch { return '#'; } };
@@ -246,12 +246,17 @@ const beginReveals = () => {
   document.querySelectorAll('.media-reveal, .media-surface-reveal').forEach(element => reduce ? element.classList.add('seen') : reveal.observe(element));
 };
 requestAnimationFrame(() => requestAnimationFrame(beginReveals));
-addEventListener('pageshow', event => {
-  if (!event.persisted || reduce) return;
-  document.querySelectorAll('.text-reveal, .media-reveal, .media-surface-reveal').forEach(element => {
-    element.classList.remove('seen');
-    reveal.observe(element);
-  });
+const replayReveals = () => {
+  if (reduce) return;
+  document.querySelectorAll('.text-reveal, .media-reveal, .media-surface-reveal').forEach(element => { reveal.unobserve(element); element.classList.remove('seen'); });
+  requestAnimationFrame(() => requestAnimationFrame(() => document.querySelectorAll('.text-reveal, .media-reveal, .media-surface-reveal').forEach(element => reveal.observe(element))));
+};
+addEventListener('pageshow', replayReveals);
+document.querySelectorAll('.hero-birds i').forEach((bird,index) => {
+  const landingSets = index ? [[18,-3,-28,-9],[-22,11,30,-12],[42,6,-36,-6]] : [[0,0,34,-8],[-36,14,28,-11],[28,-10,40,7]];
+  let cycle = Math.floor(Math.random()*landingSets.length);
+  const setLanding = () => { const [x,y,hx,hy] = landingSets[cycle++ % landingSets.length]; bird.style.setProperty('--land-x',`${x}px`); bird.style.setProperty('--land-y',`${y}px`); bird.style.setProperty('--hop-x',`${hx}px`); bird.style.setProperty('--hop-y',`${hy}px`); };
+  setLanding(); bird.addEventListener('animationiteration', setLanding);
 });
 document.querySelectorAll('img:not(.hero img)').forEach(img => { img.loading = 'lazy'; img.decoding = 'async'; });
 
