@@ -4,7 +4,7 @@
   ['Services', 'services.html'], ['Questions', 'questions.html'], ['Contact', 'contact.html']
 ];
 const current = location.pathname.split('/').pop() || 'index.html';
-const deployment = 'portfolio-2026-v33';
+const deployment = 'portfolio-2026-v34';
 const siteContent = window.PORTFOLIO_CONTENT || {};
 const introWasSeen = (() => { try { return localStorage.getItem('archive-intro-seen') === '1'; } catch { return false; } })();
 const showArchiveIntro = current === 'index.html' && siteContent.introEnabled !== false && !introWasSeen;
@@ -26,7 +26,7 @@ document.body.insertAdjacentHTML('afterbegin', `
     <nav id="main-nav">${pages.map(([name, url]) => `<a ${current === url ? 'class="active"' : ''} href="${url}">${name}</a>`).join('')}</nav>
   </header>
   <div class="nav-blur-field" aria-hidden="true"></div>
-  ${showArchiveIntro ? `<div class="camera-intro archive-logo-intro" aria-hidden="true"><div class="intro-paper"></div><div class="intro-logo-camera"><img class="intro-camera-mark" src="media/website-logo-transparent-shadow-v30.png" alt=""><i class="intro-spool intro-spool-left"><img src="media/website-logo-transparent-shadow-v30.png" alt=""></i><i class="intro-spool intro-spool-right"><img src="media/website-logo-transparent-shadow-v30.png" alt=""></i><div class="intro-picture"><figure class="intro-scene intro-western"><img class="scene-pencil" src="media/intro-western-v33.webp" alt=""><img class="scene-ink" src="media/intro-western-v33.webp" alt=""></figure><figure class="intro-scene intro-samurai"><img class="scene-pencil" src="media/intro-samurai-v33.webp" alt=""><img class="scene-ink" src="media/intro-samurai-v33.webp" alt=""></figure><figure class="intro-scene intro-knight"><img class="scene-pencil" src="media/intro-knight-v33.webp" alt=""><img class="scene-ink" src="media/intro-knight-v33.webp" alt=""></figure><span class="intro-frame-grain"></span></div></div><p>THE ARCHIVE / CHRISTIAN O. REYES</p></div>` : ''}`);
+  ${showArchiveIntro ? `<div class="camera-intro archive-logo-intro" aria-hidden="true"><div class="intro-paper"></div><div class="intro-logo-camera"><img class="intro-camera-mark" src="media/website-logo-transparent-shadow-v30.png" alt=""><i class="intro-spool intro-spool-left"><img src="media/website-logo-transparent-shadow-v30.png" alt=""></i><i class="intro-spool intro-spool-right"><img src="media/website-logo-transparent-shadow-v30.png" alt=""></i><div class="intro-picture"><figure class="intro-scene intro-western"><img class="scene-pencil" src="media/intro-western-v34.webp" alt=""></figure><figure class="intro-scene intro-samurai"><img class="scene-pencil" src="media/intro-samurai-v34.webp" alt=""></figure><figure class="intro-scene intro-knight"><img class="scene-pencil" src="media/intro-knight-v34.webp" alt=""></figure><span class="intro-frame-grain"></span></div></div><p>THE ARCHIVE / CHRISTIAN O. REYES</p></div>` : ''}`);
 if (showArchiveIntro) { try { localStorage.setItem('archive-intro-seen', '1'); } catch {} }
 
 const menu = document.querySelector('.menu-toggle');
