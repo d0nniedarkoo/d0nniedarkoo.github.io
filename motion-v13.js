@@ -4,7 +4,7 @@
   ['Services', 'services.html'], ['Questions', 'questions.html'], ['Contact', 'contact.html']
 ];
 const current = location.pathname.split('/').pop() || 'index.html';
-const deployment = 'portfolio-2026-v20';
+const deployment = 'portfolio-2026-v21';
 const siteContent = window.PORTFOLIO_CONTENT || {};
 const escapeMarkup = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
 const safeExternalHref = value => { try { const url = new URL(value); return url.protocol === 'https:' ? url.href : '#'; } catch { return '#'; } };
@@ -225,12 +225,21 @@ mediaLightboxImage.addEventListener('dblclick', () => { mediaZoom.scale = mediaZ
 document.querySelectorAll('main h1, main h2, main h3, main p, main summary, main .credit-links, main .socials').forEach(element => {
   if (!element.closest('.hero-copy') && !element.matches('.image-mark')) element.classList.add('text-reveal');
 });
+const revealGroups = new Map();
+document.querySelectorAll('.text-reveal').forEach(element => {
+  const group = element.closest('article, details, section, .two-col > div') || element.parentElement;
+  const index = revealGroups.get(group) || 0;
+  element.style.setProperty('--reveal-delay', `${Math.min(index * 85, 340)}ms`);
+  revealGroups.set(group, index + 1);
+});
 const reveal = new IntersectionObserver(entries => entries.forEach(entry => {
   if (entry.isIntersecting) { entry.target.classList.add('seen'); reveal.unobserve(entry.target); }
 }), { threshold: .06, rootMargin: '0px 0px 10% 0px' });
-document.querySelectorAll('img.fade').forEach(image => image.classList.add('seen'));
+document.querySelectorAll('main img, main video').forEach(media => media.classList.add('media-reveal'));
+document.querySelectorAll('.page-hero, .contact-page, .filmmaking-profile, .home-grid a').forEach(surface => surface.classList.add('media-surface-reveal'));
 document.querySelectorAll('.reveal').forEach(element => element.classList.add('seen'));
 document.querySelectorAll('.text-reveal').forEach(element => reduce ? element.classList.add('seen') : reveal.observe(element));
+document.querySelectorAll('.media-reveal, .media-surface-reveal').forEach(element => reduce ? element.classList.add('seen') : reveal.observe(element));
 document.querySelectorAll('img:not(.hero img)').forEach(img => { img.loading = 'lazy'; img.decoding = 'async'; });
 
 document.querySelectorAll('.gallery').forEach(gallery => {
