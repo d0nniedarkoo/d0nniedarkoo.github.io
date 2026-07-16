@@ -1,10 +1,10 @@
-const pages = [
+﻿const pages = [
   ['Home', 'index.html'], ['Artist', 'author.html'], ['Filmmaking', 'filmmaking.html'],
   ['Screenwriting', 'screenwriting.html'], ['Collection', 'collection.html'], ['Journal', 'blog.html'],
   ['Services', 'services.html'], ['Questions', 'questions.html'], ['Contact', 'contact.html']
 ];
 const current = location.pathname.split('/').pop() || 'index.html';
-const deployment = 'portfolio-2026-v13';
+const deployment = 'portfolio-2026-v14';
 const siteContent = window.PORTFOLIO_CONTENT || {};
 const escapeMarkup = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
 const safeExternalHref = value => { try { const url = new URL(value); return url.protocol === 'https:' ? url.href : '#'; } catch { return '#'; } };
@@ -181,11 +181,6 @@ if (current === 'screenwriting.html') {
   const library = document.querySelector('.script-library');
   if (library) library.innerHTML = `<p class="eyebrow">Scripts / Selected writing</p><h2 class="asset-title">From the archive.</h2><div class="script-preview-grid">${scripts.map(([slug, title, type], index) => `<a class="script-preview ${index === 0 ? 'featured-script' : ''}" href="media/scripts/${escapeMarkup(slug)}.pdf"><img src="media/scripts/previews/${escapeMarkup(slug)}.jpg" alt="Front page of ${escapeMarkup(title)}"><span><span><small>${escapeMarkup(type)}</small><strong>${escapeMarkup(title)}</strong></span><small>Read PDF</small></span></a>`).join('')}</div>`;
 }
-if (current === 'services.html') {
-  const grid = document.querySelector('.service-grid');
-  if (grid && !grid.querySelector('.writing-service')) grid.insertAdjacentHTML('beforeend', `<article class="service-card writing-service reveal"><img class="fade" src="media/writing-home-v3.jpg" alt="Screenplay pages"><div><h2>Writing</h2><p>Screenplays, treatments, story development, beat sheets, and production-ready narrative work.</p></div></article>`);
-}
-
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 document.body.insertAdjacentHTML('beforeend', `<dialog class="media-lightbox" aria-label="Full-size portfolio image"><button class="media-lightbox-close" type="button">Close</button><figure><img src="" alt=""><figcaption></figcaption></figure></dialog>`);
 const mediaLightbox = document.querySelector('.media-lightbox');
