@@ -4,7 +4,7 @@
   ['Services', 'services.html'], ['Questions', 'questions.html'], ['Contact', 'contact.html']
 ];
 const current = location.pathname.split('/').pop() || 'index.html';
-const deployment = 'portfolio-2026-v22';
+const deployment = 'portfolio-2026-v23';
 const siteContent = window.PORTFOLIO_CONTENT || {};
 const escapeMarkup = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
 const safeExternalHref = value => { try { const url = new URL(value); return url.protocol === 'https:' ? url.href : '#'; } catch { return '#'; } };
@@ -246,6 +246,13 @@ const beginReveals = () => {
   document.querySelectorAll('.media-reveal, .media-surface-reveal').forEach(element => reduce ? element.classList.add('seen') : reveal.observe(element));
 };
 requestAnimationFrame(() => requestAnimationFrame(beginReveals));
+addEventListener('pageshow', event => {
+  if (!event.persisted || reduce) return;
+  document.querySelectorAll('.text-reveal, .media-reveal, .media-surface-reveal').forEach(element => {
+    element.classList.remove('seen');
+    reveal.observe(element);
+  });
+});
 document.querySelectorAll('img:not(.hero img)').forEach(img => { img.loading = 'lazy'; img.decoding = 'async'; });
 
 document.querySelectorAll('.gallery').forEach(gallery => {
