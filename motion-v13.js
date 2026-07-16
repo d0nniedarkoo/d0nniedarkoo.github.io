@@ -4,7 +4,7 @@
   ['Services', 'services.html'], ['Questions', 'questions.html'], ['Contact', 'contact.html']
 ];
 const current = location.pathname.split('/').pop() || 'index.html';
-const deployment = 'portfolio-2026-v30';
+const deployment = 'portfolio-2026-v31';
 const siteContent = window.PORTFOLIO_CONTENT || {};
 const escapeMarkup = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
 const safeExternalHref = value => { try { const url = new URL(value); return url.protocol === 'https:' ? url.href : '#'; } catch { return '#'; } };
@@ -19,12 +19,12 @@ if (current === 'blog.html') document.body.classList.add('journal-page');
 document.body.insertAdjacentHTML('afterbegin', `
   <div class="loader" aria-hidden="true"><div><span>The Archive</span><i></i><small>Film · Photo · Story</small></div></div>
   <div class="grain" aria-hidden="true"></div>
-  <header class="site-header"><a class="brand" href="index.html"><img class="brand-logo" src="media/website-logo-transparent-shadow-v30.png" alt=""><span>The Archive</span></a>
+  <header class="site-header"><a class="brand" href="index.html"><span class="brand-logo-wrap" aria-hidden="true"><img class="brand-logo" src="media/website-logo-transparent-shadow-v30.png" alt=""><i class="brand-spool brand-spool-left"><img src="media/website-logo-transparent-shadow-v30.png" alt=""></i><i class="brand-spool brand-spool-right"><img src="media/website-logo-transparent-shadow-v30.png" alt=""></i></span><span>The Archive</span></a>
     <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span><b>Menu</b></button>
     <nav id="main-nav">${pages.map(([name, url]) => `<a ${current === url ? 'class="active"' : ''} href="${url}">${name}</a>`).join('')}</nav>
   </header>
   <div class="nav-blur-field" aria-hidden="true"></div>
-  ${current === 'index.html' && siteContent.introEnabled !== false ? `<div class="camera-intro" aria-hidden="true"><div class="cine-blueprint"></div><div class="cine-camera-rig"><img class="cine-camera-master" src="media/camera/cine-camera-reference-v11.jpg" alt=""><div class="cine-slice cine-reel-shell"></div><div class="cine-slice cine-body-shell"></div><div class="cine-slice cine-optics-shell"></div><div class="cine-slice cine-support-shell"></div><div class="cine-internal film-reel reel-feed"><i></i></div><div class="cine-internal film-reel reel-takeup"><i></i></div><div class="cine-internal film-gate"><i></i></div><div class="cine-internal rotary-shutter"></div><div class="cine-internal sprocket sprocket-one"></div><div class="cine-internal sprocket sprocket-two"></div><div class="cine-internal film-strip"></div><div class="cine-internal pressure-plate"></div><div class="cine-internal camera-motor"><i></i></div><div class="cine-internal lens-element lens-one"></div><div class="cine-internal lens-element lens-two"></div><div class="cine-internal lens-element lens-three"></div><div class="cine-internal matte-box-core"></div></div><div class="camera-floor-shadow"></div><p>THE ARCHIVE / MOTION PICTURE CAMERA</p></div>` : ''}`);
+  ${current === 'index.html' && siteContent.introEnabled !== false ? `<div class="camera-intro archive-logo-intro" aria-hidden="true"><div class="intro-paper"></div><div class="intro-logo-camera"><img class="intro-camera-mark" src="media/website-logo-transparent-shadow-v30.png" alt=""><i class="intro-spool intro-spool-left"><img src="media/website-logo-transparent-shadow-v30.png" alt=""></i><i class="intro-spool intro-spool-right"><img src="media/website-logo-transparent-shadow-v30.png" alt=""></i><div class="intro-picture"><figure class="intro-scene intro-western"><img src="media/intro-western-v31.webp" alt=""></figure><figure class="intro-scene intro-samurai"><img src="media/intro-samurai-v31.webp" alt=""></figure><figure class="intro-scene intro-knight"><img src="media/intro-knight-v31.webp" alt=""></figure><span class="intro-frame-grain"></span></div></div><p>THE ARCHIVE / MOTION PICTURE</p></div>` : ''}`);
 
 const menu = document.querySelector('.menu-toggle');
 const nav = document.querySelector('#main-nav');
