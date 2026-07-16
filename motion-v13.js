@@ -4,7 +4,7 @@
   ['Services', 'services.html'], ['Questions', 'questions.html'], ['Contact', 'contact.html']
 ];
 const current = location.pathname.split('/').pop() || 'index.html';
-const deployment = 'portfolio-2026-v31';
+const deployment = 'portfolio-2026-v32';
 const siteContent = window.PORTFOLIO_CONTENT || {};
 const escapeMarkup = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
 const safeExternalHref = value => { try { const url = new URL(value); return url.protocol === 'https:' ? url.href : '#'; } catch { return '#'; } };
@@ -24,7 +24,7 @@ document.body.insertAdjacentHTML('afterbegin', `
     <nav id="main-nav">${pages.map(([name, url]) => `<a ${current === url ? 'class="active"' : ''} href="${url}">${name}</a>`).join('')}</nav>
   </header>
   <div class="nav-blur-field" aria-hidden="true"></div>
-  ${current === 'index.html' && siteContent.introEnabled !== false ? `<div class="camera-intro archive-logo-intro" aria-hidden="true"><div class="intro-paper"></div><div class="intro-logo-camera"><img class="intro-camera-mark" src="media/website-logo-transparent-shadow-v30.png" alt=""><i class="intro-spool intro-spool-left"><img src="media/website-logo-transparent-shadow-v30.png" alt=""></i><i class="intro-spool intro-spool-right"><img src="media/website-logo-transparent-shadow-v30.png" alt=""></i><div class="intro-picture"><figure class="intro-scene intro-western"><img src="media/intro-western-v31.webp" alt=""></figure><figure class="intro-scene intro-samurai"><img src="media/intro-samurai-v31.webp" alt=""></figure><figure class="intro-scene intro-knight"><img src="media/intro-knight-v31.webp" alt=""></figure><span class="intro-frame-grain"></span></div></div><p>THE ARCHIVE / MOTION PICTURE</p></div>` : ''}`);
+  ${current === 'index.html' && siteContent.introEnabled !== false ? `<div class="camera-intro archive-logo-intro" aria-hidden="true"><div class="intro-paper"></div><div class="intro-logo-camera"><img class="intro-camera-mark" src="media/website-logo-transparent-shadow-v30.png" alt=""><i class="intro-spool intro-spool-left"><img src="media/website-logo-transparent-shadow-v30.png" alt=""></i><i class="intro-spool intro-spool-right"><img src="media/website-logo-transparent-shadow-v30.png" alt=""></i><div class="intro-picture"><figure class="intro-scene intro-western"><img class="scene-pencil" src="media/intro-western-v32.webp" alt=""><img class="scene-ink" src="media/intro-western-v32.webp" alt=""></figure><figure class="intro-scene intro-samurai"><img class="scene-pencil" src="media/intro-samurai-v32.webp" alt=""><img class="scene-ink" src="media/intro-samurai-v32.webp" alt=""></figure><figure class="intro-scene intro-knight"><img class="scene-pencil" src="media/intro-knight-v32.webp" alt=""><img class="scene-ink" src="media/intro-knight-v32.webp" alt=""></figure><span class="intro-frame-grain"></span></div></div><p>THE ARCHIVE / CHRISTIAN O. REYES</p></div>` : ''}`);
 
 const menu = document.querySelector('.menu-toggle');
 const nav = document.querySelector('#main-nav');
@@ -253,10 +253,18 @@ const replayReveals = () => {
 };
 addEventListener('pageshow', replayReveals);
 document.querySelectorAll('.hero-birds i').forEach((bird,index) => {
-  const landingSets = index ? [[34,-3,-7,-1],[-38,8,9,-2],[12,15,-11,-1],[-25,-9,8,3]] : [[-34,1,8,-2],[31,8,-9,-2],[-12,16,10,-2],[22,-12,-8,3]];
+  const landingSets = index ? [[[.24,.366],[.12,.378]],[[.72,.410],[.58,.416]],[[.93,.463],[.88,.430]],[[.27,.284],[.18,.293]]] : [[[.12,.378],[.24,.366]],[[.58,.416],[.72,.410]],[[.88,.430],[.93,.463]],[[.18,.293],[.27,.284]]];
+  const hero = document.querySelector('.hero'); const image = hero?.querySelector(':scope > img:not(.hero-foreground)'); const origin = document.querySelector('.hero-birds');
   let cycle = Math.floor(Math.random()*landingSets.length);
-  const setLanding = () => { const [x,y,hx,hy] = landingSets[cycle++ % landingSets.length]; bird.style.setProperty('--land-x',`${x}vw`); bird.style.setProperty('--land-y',`${y}vh`); bird.style.setProperty('--hop-x',`${hx}vw`); bird.style.setProperty('--hop-y',`${hy}vh`); };
-  setLanding(); bird.addEventListener('animationiteration', setLanding);
+  const setLanding = () => {
+    if (!hero || !image || !origin || !image.naturalWidth) return;
+    const [[x,y],[hopX,hopY]] = landingSets[cycle++ % landingSets.length]; const bounds = hero.getBoundingClientRect(); const originBounds = origin.getBoundingClientRect();
+    const scale = Math.max(bounds.width / image.naturalWidth, bounds.height / image.naturalHeight); const renderedWidth = image.naturalWidth * scale; const renderedHeight = image.naturalHeight * scale; const offsetX = bounds.left + (bounds.width - renderedWidth) / 2; const offsetY = bounds.top + (bounds.height - renderedHeight) / 2;
+    const landX = offsetX + x * renderedWidth - originBounds.left; const landY = offsetY + y * renderedHeight - originBounds.top; const nextX = offsetX + hopX * renderedWidth - originBounds.left; const nextY = offsetY + hopY * renderedHeight - originBounds.top;
+    bird.style.setProperty('--land-x',`${landX}px`); bird.style.setProperty('--land-y',`${landY}px`); bird.style.setProperty('--hop-x',`${nextX - landX}px`); bird.style.setProperty('--hop-y',`${nextY - landY}px`);
+  };
+  setLanding(); if (!image?.complete) image?.addEventListener('load', setLanding, { once: true }); bird.addEventListener('animationiteration', setLanding);
+  addEventListener('resize', setLanding, { passive: true });
 });
 document.querySelectorAll('img:not(.hero img)').forEach(img => { img.loading = 'lazy'; img.decoding = 'async'; });
 
