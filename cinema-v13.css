@@ -148,19 +148,20 @@ body{padding-top:88px}.site-header{position:fixed;inset:0 0 auto 0;height:88px;m
 @media(max-width:900px){.artist-page .artist-bio>.portrait-wrap,.artist-page .artist-bio>div:first-child{padding-top:0!important}.project-gallery-page .collection-switcher{min-height:54px;padding:10px 14px}.project-gallery-page .collection-switcher a{font-size:16px}.media-lightbox:after{top:auto;bottom:16px;white-space:nowrap}}
 
 /* Balanced opening composition and subtle atmospheric movement */
-.hero>img{animation:cloud-drift 14s ease-in-out infinite alternate;transform-origin:50% 48%;will-change:transform}
+.hero>img{animation:none!important;transform:none!important}
+.cloud-motion{position:absolute;z-index:0;inset:-7%;pointer-events:none;background:url('media/hero-cloud-plate-v17.webp') center/cover;opacity:.32;mix-blend-mode:screen;filter:saturate(.92) contrast(1.04);-webkit-mask-image:linear-gradient(118deg,rgba(0,0,0,.18) 0 28%,rgba(0,0,0,.72) 48%,#000 100%);mask-image:linear-gradient(118deg,rgba(0,0,0,.18) 0 28%,rgba(0,0,0,.72) 48%,#000 100%);animation:cloud-layer-drift 12s ease-in-out infinite alternate;will-change:transform}
 .hero-copy{grid-template-columns:minmax(0,1fr) minmax(520px,58vw);grid-template-rows:auto 1fr auto;padding:clamp(42px,7vh,88px) 7vw;column-gap:4vw}
 .hero-copy .archive-title,.hero-copy .directed-title,.hero-copy .hello,.hero-rule{grid-column:2;width:100%;max-width:900px;justify-self:start}
-.hero-copy .archive-title{grid-row:1;text-align:left;padding-bottom:20px;position:relative}
-.hero-copy .archive-title:after{content:"";position:absolute;left:0;bottom:0;width:clamp(110px,12vw,190px);height:1px;background:rgba(255,255,255,.8)}
-.hero-copy .directed-title{grid-row:2;align-self:center;text-align:left;max-width:10ch;line-height:.84;font-size:clamp(70px,7.6vw,124px)}
+.hero-copy .archive-title{grid-row:1;text-align:left;padding-bottom:22px;position:relative;width:max-content;max-width:100%;font-size:clamp(64px,7vw,108px)}
+.hero-copy .archive-title:after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(255,255,255,.86)}
+.hero-copy .directed-title{grid-row:2;align-self:center;text-align:left;max-width:none;line-height:.88;font-size:clamp(60px,6.2vw,100px);white-space:nowrap}
 .hero-copy .directed-title span{display:inline-block;font-size:.44em;line-height:1;letter-spacing:-.035em;margin-bottom:.08em}
 .hero-rule{display:none}
-.hero-copy .hello{grid-row:3;align-self:end;justify-self:start;width:auto;text-align:left;margin:0;font-size:clamp(21px,2vw,30px)}
+.hero-copy .hello{grid-row:3;align-self:end;justify-self:start;width:auto;text-align:left;margin:0;font-size:clamp(21px,2vw,30px);white-space:nowrap}
 .artist-page .artist-bio{width:min(100%,1320px);margin-inline:auto;padding-inline:clamp(30px,7vw,96px);grid-template-columns:minmax(300px,460px) minmax(0,640px);justify-content:center;align-items:center}
 .artist-page .portrait-wrap{justify-self:center}
 .artist-page .artist-bio>.reveal:last-child{align-self:center}
-@keyframes cloud-drift{0%{transform:scale(1.12) translate3d(-3.5%,1%,0)}50%{transform:scale(1.16) translate3d(.5%,-1.5%,0)}100%{transform:scale(1.12) translate3d(3.5%,.8%,0)}}
-@media(prefers-reduced-motion:reduce){.hero>img{animation:none;transform:none}}
-@media(max-width:900px){.hero-copy{grid-template-columns:1fr;grid-template-rows:auto 1fr auto;padding:6vh 7vw}.hero-copy .archive-title,.hero-copy .directed-title,.hero-copy .hello{grid-column:1;width:100%}.hero-copy .archive-title{font-size:13vw}.hero-copy .directed-title{font-size:15vw;align-self:center;margin:0;max-width:10ch}.hero-copy .hello{justify-self:start;width:auto}.artist-page .artist-bio{grid-template-columns:1fr;padding-inline:7vw}.artist-page .portrait-wrap{justify-self:center}.artist-page .artist-bio>.reveal:last-child{width:min(100%,680px);justify-self:center}}
+@keyframes cloud-layer-drift{0%{transform:translate3d(-4%,1%,0) scale(1.08)}50%{transform:translate3d(0,-1.4%,0) scale(1.11)}100%{transform:translate3d(4%,.6%,0) scale(1.08)}}
+@media(prefers-reduced-motion:reduce){.cloud-motion{animation:none;transform:none}}
+@media(max-width:900px){.hero-copy{grid-template-columns:1fr;grid-template-rows:auto 1fr auto;padding:6vh 7vw}.hero-copy .archive-title,.hero-copy .directed-title,.hero-copy .hello{grid-column:1}.hero-copy .archive-title{font-size:13vw;width:max-content}.hero-copy .directed-title{font-size:11.4vw;align-self:center;margin:0;max-width:none;white-space:nowrap}.hero-copy .hello{justify-self:start;width:auto}.artist-page .artist-bio{grid-template-columns:1fr;padding-inline:7vw}.artist-page .portrait-wrap{justify-self:center}.artist-page .artist-bio>.reveal:last-child{width:min(100%,680px);justify-self:center}}
 .journal-inline-image{display:block;width:100%;height:auto;max-height:78vh;object-fit:contain;margin:clamp(28px,5vw,64px) 0}
