@@ -192,10 +192,10 @@ body.loaded .hero-copy .hello{animation:hero-copy-arrive .85s .4s var(--ease) bo
 .hero-copy{transition:filter .8s var(--ease),text-shadow .8s var(--ease)}
 .hero:has(.archive-title:hover,.directed-title:hover,.hello:hover)>.hero-foreground{opacity:.34;filter:saturate(1.04) contrast(1.02) brightness(.96)}
 .hero-copy:has(.archive-title:hover,.directed-title:hover,.hello:hover){filter:drop-shadow(0 5px 18px rgba(0,0,0,.24))}
-.brand{display:inline-flex;align-items:center;gap:11px}
+.brand{display:inline-flex;align-items:center;gap:7px}
 .brand-logo{width:48px;height:48px;object-fit:contain;flex:0 0 auto;filter:drop-shadow(0 7px 9px rgba(0,0,0,.38))}
 .brand span{white-space:nowrap}
-@media(max-width:900px){.brand{gap:8px}.brand-logo{width:38px;height:38px;filter:drop-shadow(0 5px 7px rgba(0,0,0,.34))}}
+@media(max-width:900px){.brand{gap:5px}.brand-logo{width:38px;height:38px;filter:drop-shadow(0 5px 7px rgba(0,0,0,.34))}}
 
 /* Refined hover: fade the unchanged foreground instead of jumping layers */
 .hero>.hero-foreground{transition:opacity 1.25s cubic-bezier(.4,0,.2,1)!important}
@@ -214,7 +214,7 @@ body.loaded .hero-copy .hello{animation:hero-copy-arrive .85s .4s var(--ease) bo
 @media(max-width:900px){.brand-logo{width:74px;height:60px;filter:none}}
 
 /* Turning header reels and the paper-camera story intro */
-.brand-logo-wrap{position:relative;display:block;width:96px;height:78px;flex:0 0 auto;overflow:hidden}.brand-logo{position:absolute;inset:0;width:100%;height:100%}.brand-spool{position:absolute;z-index:2;top:11.2%;width:24%;aspect-ratio:1;border-radius:50%;overflow:hidden;transform-origin:center;pointer-events:none}.brand-spool-left{left:21.3%}.brand-spool-right{left:44.2%}.brand-spool img{position:absolute;width:416.667%;height:339.13%;max-width:none;object-fit:contain;top:-37.4%}.brand-spool-left img{left:-88.75%}.brand-spool-right img{left:-184.17%}.brand:hover .brand-spool-left,.brand:focus-visible .brand-spool-left{animation:brand-reel-turn 1.55s cubic-bezier(.2,.7,.25,1) infinite}.brand:hover .brand-spool-right,.brand:focus-visible .brand-spool-right{animation:brand-reel-turn-reverse 1.85s cubic-bezier(.2,.7,.25,1) infinite}
+.brand-logo-wrap{position:relative;display:block;width:96px;height:78px;flex:0 0 auto;overflow:hidden}.brand-logo{position:absolute;inset:0;width:100%;height:100%}.brand-spool{position:absolute;z-index:2;top:11.2%;width:24%;aspect-ratio:1;border-radius:50%;overflow:hidden;transform-origin:center;pointer-events:none}.brand-spool-left{left:21.3%;animation:brand-reel-turn 1.55s linear infinite paused}.brand-spool-right{left:44.2%;animation:brand-reel-turn-reverse 1.85s linear infinite paused}.brand-spool img{position:absolute;width:416.667%;height:339.13%;max-width:none;object-fit:contain;top:-37.4%}.brand-spool-left img{left:-88.75%}.brand-spool-right img{left:-184.17%}.brand:hover .brand-spool,.brand:focus-visible .brand-spool{animation-play-state:running}
 @keyframes brand-reel-turn{to{transform:rotate(360deg)}}@keyframes brand-reel-turn-reverse{to{transform:rotate(-360deg)}}
 
 .camera-intro.archive-logo-intro{z-index:900;display:grid;place-items:center;background:#eee8dc;color:#191713;perspective:none;animation:archive-intro-exit 10.4s cubic-bezier(.55,0,.2,1) forwards}.intro-paper{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 46%,rgba(255,255,255,.94),rgba(244,239,229,.9) 54%,rgba(218,207,189,.88)),url('media/intro-western-v32.webp') center/cover;filter:grayscale(1) contrast(.45) brightness(1.75);opacity:.2;transform:scale(1.06);animation:intro-paper-breathe 10s ease forwards}.intro-logo-camera{position:relative;width:min(76vmin,720px);aspect-ratio:534/554;filter:drop-shadow(0 25px 24px rgba(70,55,36,.28));transform-origin:50% 62%;animation:intro-camera-arrive 10s cubic-bezier(.45,0,.2,1) forwards}.intro-camera-mark{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.intro-spool{position:absolute;z-index:2;top:11.4%;width:31%;aspect-ratio:1;border-radius:50%;overflow:hidden;transform-origin:center}.intro-spool img{position:absolute;top:-38.2%;width:322.6%;height:334.6%;max-width:none;object-fit:contain}.intro-spool-left{left:13.2%;animation:intro-spool-turn 3.2s linear infinite}.intro-spool-left img{left:-42.6%}.intro-spool-right{left:43%;animation:intro-spool-turn-reverse 3.6s linear infinite}.intro-spool-right img{left:-138.7%}.intro-picture{position:absolute;z-index:4;left:29.2%;top:45.5%;width:31.7%;height:17.4%;overflow:hidden;background:#171511;clip-path:polygon(1% 5%,98% 1%,99% 94%,0 100%);box-shadow:inset 0 0 0 2px rgba(24,20,16,.78)}.intro-scene{position:absolute;inset:0;margin:0;opacity:0;overflow:hidden;background:#e8dfcf}.intro-scene img{width:100%;height:100%;object-fit:cover;filter:sepia(.22) contrast(1.08);transform:scale(1.08)}.intro-western{animation:intro-scene-western 10s ease both}.intro-western img{animation:intro-drift-western 3.35s ease-out both}.intro-samurai{animation:intro-scene-samurai 10s ease both}.intro-samurai img{animation:intro-drift-samurai 3.35s 3.15s ease-out both}.intro-knight{animation:intro-scene-knight 10s ease both}.intro-knight img{animation:intro-drift-knight 3.35s 6.3s ease-out both}.intro-frame-grain{position:absolute;z-index:5;inset:-20%;opacity:.25;mix-blend-mode:multiply;background-image:repeating-linear-gradient(0deg,transparent 0 3px,rgba(20,17,13,.12) 4px);animation:intro-grain 420ms steps(2) infinite}.archive-logo-intro p{z-index:5;bottom:4.8vh;color:#31291f;font-size:9px;letter-spacing:.34em;animation:intro-caption 10s ease both}
@@ -233,9 +233,436 @@ body.loaded .hero-copy .hello{animation:hero-copy-arrive .85s .4s var(--ease) bo
 /* The screen now uses the logo's own minimal ink-symbol language. */
 .camera-intro.archive-logo-intro .intro-paper{background:radial-gradient(ellipse at 50% 46%,rgba(255,255,255,.96),rgba(244,239,229,.92) 58%,rgba(218,207,189,.86)),url('media/intro-western-v33.webp') center/cover}.intro-scene .scene-pencil{opacity:.16;filter:grayscale(1) contrast(.35) brightness(1.24)}.intro-scene .scene-ink{filter:grayscale(1) contrast(1.16);animation-timing-function:steps(14,end)!important}.intro-scene:after{width:12%;background:repeating-linear-gradient(84deg,transparent 0 3px,rgba(30,25,20,.18) 4px 5px,transparent 6px 9px);animation-timing-function:steps(14,end)}
 .brand-logo-wrap{transform:translateY(-4px)}
-@media(max-width:900px){.brand-logo-wrap{transform:translateY(-3px)}.brand-spool,.brand:hover .brand-spool,.brand:focus-visible .brand-spool{animation:none!important}}
+@media(max-width:900px){.brand-logo-wrap{transform:translateY(-3px)}.brand-spool,.brand:hover .brand-spool,.brand:focus-visible .brand-spool{animation-play-state:paused}}
 
 /* Keep the paper drawing inside the camera's original ink frame. */
 .intro-picture{left:29.45%;top:46.55%;width:31.05%;height:15.85%;padding:3px;background:#d0bea2;clip-path:polygon(1.5% 4%,98% 1%,98.7% 95%,1% 98%)}.intro-scene{inset:3px;background:#d0bea2}.intro-scene .scene-pencil{opacity:1;filter:none;mix-blend-mode:normal;animation:intro-symbol-hold 3.15s ease-out both}.intro-scene .scene-ink,.intro-scene:after{display:none}.intro-samurai .scene-pencil{animation-delay:3.2s}.intro-knight .scene-pencil{animation-delay:6.4s}.intro-frame-grain{opacity:.08;mix-blend-mode:multiply}
 @keyframes intro-symbol-hold{0%{transform:scale(1.025) translateX(-.7%)}100%{transform:scale(1) translateX(.7%)}}
-@media(max-width:900px){.brand-spool,.brand:hover .brand-spool,.brand:focus-visible .brand-spool{animation:none!important}.nav-open .brand-spool-left{animation:brand-reel-turn 1.55s linear infinite!important}.nav-open .brand-spool-right{animation:brand-reel-turn-reverse 1.85s linear infinite!important}}
+@media(max-width:900px){.brand-spool,.brand:hover .brand-spool,.brand:focus-visible .brand-spool{animation-play-state:paused}.nav-open .brand .brand-spool{animation-play-state:running}}
+
+/* Intro v35: projected motion instead of cross-faded stacked stills. */
+.camera-intro.archive-logo-intro .intro-picture{isolation:isolate;background:transparent}
+.camera-intro.archive-logo-intro .intro-scene{inset:3px;opacity:0;will-change:transform,opacity,clip-path}
+.camera-intro.archive-logo-intro .intro-western{animation:intro-shot-western 3.2s cubic-bezier(.22,.7,.24,1) both}
+.camera-intro.archive-logo-intro .intro-samurai{animation:intro-shot-samurai 3.2s 3.2s cubic-bezier(.22,.7,.24,1) both}
+.camera-intro.archive-logo-intro .intro-knight{animation:intro-shot-knight 3.2s 6.4s cubic-bezier(.22,.7,.24,1) both}
+.camera-intro.archive-logo-intro .intro-scene .scene-pencil{animation:intro-live-frame 3.2s ease-out both;transform-origin:center;will-change:transform,filter}
+.camera-intro.archive-logo-intro .intro-samurai .scene-pencil{animation-delay:3.2s}
+.camera-intro.archive-logo-intro .intro-knight .scene-pencil{animation-delay:6.4s}
+.camera-intro.archive-logo-intro .intro-picture:after{content:"";display:block;position:absolute;z-index:8;inset:-8%;pointer-events:none;background:linear-gradient(90deg,transparent 0,rgba(246,231,201,.12) 44%,rgba(255,246,225,.7) 50%,rgba(246,231,201,.12) 56%,transparent 100%);transform:translateX(-125%) skewX(-8deg);mix-blend-mode:screen;animation:intro-projector-scan 3.2s linear 3 both}
+@keyframes intro-shot-western{0%{opacity:0;transform:translateX(13%) scale(1.03);clip-path:inset(0 100% 0 0)}7%{opacity:1}20%{clip-path:inset(0 0 0 0)}82%{opacity:1;transform:translateX(-3%) scale(1)}94%,100%{opacity:0;transform:translateX(-14%) scale(.99);clip-path:inset(0 0 0 100%)}}
+@keyframes intro-shot-samurai{0%{opacity:0;transform:translateY(12%) scale(1.04);clip-path:inset(100% 0 0 0)}7%{opacity:1}20%{clip-path:inset(0 0 0 0)}82%{opacity:1;transform:translateY(-3%) scale(1)}94%,100%{opacity:0;transform:translateY(-13%) scale(.99);clip-path:inset(0 0 100% 0)}}
+@keyframes intro-shot-knight{0%{opacity:0;transform:translateX(-13%) scale(1.04);clip-path:inset(0 0 0 100%)}7%{opacity:1}20%{clip-path:inset(0 0 0 0)}82%{opacity:1;transform:translateX(3%) scale(1)}94%,100%{opacity:0;transform:translateX(14%) scale(.99);clip-path:inset(0 100% 0 0)}}
+@keyframes intro-live-frame{0%{transform:scale(1.12);filter:contrast(.8) brightness(1.15) blur(1px)}18%{filter:contrast(1.08) brightness(1)}45%{transform:scale(1.055) translate(-1%,.5%)}72%{transform:scale(1.025) translate(1%,-.4%)}100%{transform:scale(1);filter:contrast(1.03) brightness(.96)}}
+@keyframes intro-projector-scan{0%,10%{transform:translateX(-125%) skewX(-8deg);opacity:0}16%{opacity:.8}32%{transform:translateX(125%) skewX(-8deg);opacity:0}100%{transform:translateX(125%) skewX(-8deg);opacity:0}}
+.intro-paint-canvas{display:none;position:absolute;z-index:6;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);filter:sepia(.08) contrast(1.07);transform-origin:center;animation:intro-painted-life 3.2s ease-in-out 3}
+.intro-picture.paint-mode .intro-scene{visibility:hidden}
+.intro-picture.paint-mode .intro-paint-canvas{display:block}
+.intro-picture.paint-mode .intro-frame-grain{z-index:7;opacity:.16}
+@keyframes intro-painted-life{0%{transform:translate3d(-.7%,.4%,0) scale(1.025);filter:sepia(.12) contrast(.94) brightness(1.08)}35%{transform:translate3d(.4%,-.3%,0) scale(1.012);filter:sepia(.08) contrast(1.08)}68%{transform:translate3d(-.25%,.2%,0) scale(1.006)}100%{transform:none;filter:sepia(.06) contrast(1.04) brightness(.98)}}
+
+/* Intro v39: clean paper field, borderless camera screen. */
+.camera-intro.archive-logo-intro .intro-paper{background:radial-gradient(ellipse at 50% 46%,rgba(255,255,255,.96),rgba(244,239,229,.92) 58%,rgba(218,207,189,.86))}
+.camera-intro.archive-logo-intro .intro-picture{padding:0;box-shadow:none;clip-path:none}
+.camera-intro.archive-logo-intro .intro-scene{inset:0}
+.camera-intro.archive-logo-intro .intro-paint-canvas{inset:0;width:100%;height:100%}
+
+/* Intro v40: wait for artwork before rolling and offer gesture-safe audio. */
+.intro-sound{position:absolute;z-index:12;right:clamp(18px,3vw,42px);bottom:clamp(20px,4.5vh,48px);pointer-events:auto;border:1px solid rgba(38,31,23,.35);border-radius:999px;background:rgba(244,238,226,.72);color:#2b251e;padding:9px 14px;font:9px/1 Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(8px)}
+.intro-sound:hover,.intro-sound:focus-visible{background:rgba(255,252,245,.94);border-color:rgba(38,31,23,.7)}
+.intro-sound:disabled{cursor:default;opacity:.58}
+@media(max-width:900px){.intro-sound{right:16px;bottom:18px}}
+
+/* Intro v44: browser-safe hand-painted reveal using the transparent art. */
+.camera-intro.archive-logo-intro .intro-paint-canvas{display:none!important}
+.camera-intro.archive-logo-intro .intro-scene{visibility:visible;inset:0;opacity:0;clip-path:none;transform:none}
+.camera-intro.archive-logo-intro .intro-western{animation:intro-scene-slot 3.2s steps(1,end) both}
+.camera-intro.archive-logo-intro .intro-samurai{animation:intro-scene-slot 3.2s 3.2s steps(1,end) both}
+.camera-intro.archive-logo-intro .intro-knight{animation:intro-scene-slot 3.2s 6.4s steps(1,end) both}
+.camera-intro.archive-logo-intro .intro-scene .scene-pencil{opacity:1;filter:sepia(.08) contrast(1.05);transform:none;animation:intro-brush-complete 3.2s steps(1,end) both!important;will-change:clip-path,transform,filter}
+.camera-intro.archive-logo-intro .intro-samurai .scene-pencil{animation-delay:3.2s!important}
+.camera-intro.archive-logo-intro .intro-knight .scene-pencil{animation-delay:6.4s!important}
+@keyframes intro-scene-slot{0%{opacity:1}99.8%{opacity:1}100%{opacity:0}}
+@keyframes intro-brush-complete{
+  0%,5%{clip-path:polygon(0 0,0 0,0 17%,0 17%,0 34%,0 34%,0 51%,0 51%,0 68%,0 68%,0 85%,0 85%,0 100%);transform:scale(1.025) translateX(-.7%);filter:sepia(.14) contrast(.88) brightness(1.08)}
+  18%{clip-path:polygon(0 0,23% 0,23% 17%,13% 17%,13% 34%,29% 34%,29% 51%,18% 51%,18% 68%,34% 68%,34% 85%,21% 85%,21% 100%,0 100%)}
+  36%{clip-path:polygon(0 0,47% 0,47% 17%,38% 17%,38% 34%,54% 34%,54% 51%,42% 51%,42% 68%,59% 68%,59% 85%,49% 85%,49% 100%,0 100%)}
+  56%{clip-path:polygon(0 0,72% 0,72% 17%,64% 17%,64% 34%,79% 34%,79% 51%,68% 51%,68% 68%,84% 68%,84% 85%,75% 85%,75% 100%,0 100%);transform:scale(1.012) translateX(.2%)}
+  75%{clip-path:polygon(0 0,94% 0,94% 17%,88% 17%,88% 34%,97% 34%,97% 51%,91% 51%,91% 68%,100% 68%,100% 85%,95% 85%,95% 100%,0 100%)}
+  84%,100%{clip-path:polygon(0 0,100% 0,100% 17%,100% 17%,100% 34%,100% 34%,100% 51%,100% 51%,100% 68%,100% 68%,100% 85%,100% 85%,100% 100%,0 100%);transform:none;filter:sepia(.06) contrast(1.04) brightness(.98)}
+}
+
+/* Intro v45: restore organic brush painting with fully transparent layers. */
+.camera-intro.archive-logo-intro .intro-picture,.camera-intro.archive-logo-intro .intro-scene{background:transparent!important}
+.camera-intro.archive-logo-intro .intro-picture.paint-mode .intro-scene{visibility:hidden}
+.camera-intro.archive-logo-intro .intro-picture.paint-mode .intro-paint-canvas{display:block!important}
+
+/* Intro v46: overlapping rough pigment dabs; no canvas and no background. */
+.camera-intro.archive-logo-intro .intro-picture:not(.paint-mode) .intro-scene{visibility:visible;background:transparent!important}
+.camera-intro.archive-logo-intro .intro-picture:not(.paint-mode) .intro-scene .scene-pencil{
+  clip-path:none;transform:none;opacity:1;background:transparent!important;
+  -webkit-mask-image:radial-gradient(circle,#000 52%,rgba(0,0,0,.78) 62%,transparent 76%),radial-gradient(circle,#000 50%,rgba(0,0,0,.72) 61%,transparent 75%),radial-gradient(circle,#000 54%,rgba(0,0,0,.76) 64%,transparent 78%),radial-gradient(circle,#000 48%,rgba(0,0,0,.7) 60%,transparent 76%),radial-gradient(circle,#000 52%,rgba(0,0,0,.76) 63%,transparent 77%),radial-gradient(circle,#000 49%,rgba(0,0,0,.7) 61%,transparent 75%),radial-gradient(circle,#000 55%,rgba(0,0,0,.74) 65%,transparent 79%),radial-gradient(circle,#000 50%,rgba(0,0,0,.74) 62%,transparent 77%),radial-gradient(circle,#000 53%,rgba(0,0,0,.7) 63%,transparent 78%),radial-gradient(circle,#000 48%,rgba(0,0,0,.76) 60%,transparent 75%),radial-gradient(circle,#000 54%,rgba(0,0,0,.72) 64%,transparent 78%),radial-gradient(circle,#000 51%,rgba(0,0,0,.75) 62%,transparent 77%);
+  -webkit-mask-repeat:no-repeat;-webkit-mask-position:4% 8%,34% 4%,68% 7%,96% 12%,8% 48%,38% 42%,66% 50%,94% 44%,5% 92%,34% 88%,69% 94%,96% 87%;
+  mask-image:radial-gradient(circle,#000 52%,rgba(0,0,0,.78) 62%,transparent 76%),radial-gradient(circle,#000 50%,rgba(0,0,0,.72) 61%,transparent 75%),radial-gradient(circle,#000 54%,rgba(0,0,0,.76) 64%,transparent 78%),radial-gradient(circle,#000 48%,rgba(0,0,0,.7) 60%,transparent 76%),radial-gradient(circle,#000 52%,rgba(0,0,0,.76) 63%,transparent 77%),radial-gradient(circle,#000 49%,rgba(0,0,0,.7) 61%,transparent 75%),radial-gradient(circle,#000 55%,rgba(0,0,0,.74) 65%,transparent 79%),radial-gradient(circle,#000 50%,rgba(0,0,0,.74) 62%,transparent 77%),radial-gradient(circle,#000 53%,rgba(0,0,0,.7) 63%,transparent 78%),radial-gradient(circle,#000 48%,rgba(0,0,0,.76) 60%,transparent 75%),radial-gradient(circle,#000 54%,rgba(0,0,0,.72) 64%,transparent 78%),radial-gradient(circle,#000 51%,rgba(0,0,0,.75) 62%,transparent 77%);
+  mask-repeat:no-repeat;mask-position:4% 8%,34% 4%,68% 7%,96% 12%,8% 48%,38% 42%,66% 50%,94% 44%,5% 92%,34% 88%,69% 94%,96% 87%;
+  animation:intro-pigment-dabs 3.2s cubic-bezier(.22,.7,.24,1) both!important;
+}
+.camera-intro.archive-logo-intro .intro-picture:not(.paint-mode) .intro-samurai .scene-pencil{animation-delay:3.2s!important}
+.camera-intro.archive-logo-intro .intro-picture:not(.paint-mode) .intro-knight .scene-pencil{animation-delay:6.4s!important}
+@keyframes intro-pigment-dabs{
+  0%,4%{mask-size:0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0;-webkit-mask-size:0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0;filter:sepia(.13) contrast(.9) brightness(1.08)}
+  22%{mask-size:48% 72%,44% 68%,40% 64%,0 0,42% 70%,0 0,0 0,0 0,0 0,0 0,0 0,0 0;-webkit-mask-size:48% 72%,44% 68%,40% 64%,0 0,42% 70%,0 0,0 0,0 0,0 0,0 0,0 0,0 0}
+  43%{mask-size:58% 82%,54% 78%,52% 76%,45% 68%,54% 80%,48% 72%,43% 68%,0 0,42% 66%,0 0,0 0,0 0;-webkit-mask-size:58% 82%,54% 78%,52% 76%,45% 68%,54% 80%,48% 72%,43% 68%,0 0,42% 66%,0 0,0 0,0 0}
+  66%{mask-size:72% 100%,68% 96%,66% 94%,62% 90%,68% 98%,66% 94%,62% 90%,58% 86%,62% 90%,58% 86%,54% 82%,50% 78%;-webkit-mask-size:72% 100%,68% 96%,66% 94%,62% 90%,68% 98%,66% 94%,62% 90%,58% 86%,62% 90%,58% 86%,54% 82%,50% 78%}
+  84%,100%{mask-size:145% 190%,145% 190%,145% 190%,145% 190%,145% 190%,145% 190%,145% 190%,145% 190%,145% 190%,145% 190%,145% 190%,145% 190%;-webkit-mask-size:145% 190%,145% 190%,145% 190%,145% 190%,145% 190%,145% 190%,145% 190%,145% 190%,145% 190%,145% 190%,145% 190%,145% 190%;filter:sepia(.06) contrast(1.04) brightness(.98)}
+}
+
+/* Intro/header v50: geometry calibrated to Website Logo.png. */
+.brand-spool{top:.8%;width:39%}
+.brand-spool-left{left:3.2%}
+.brand-spool-right{left:42.5%}
+.brand-spool img{width:256.42%;height:208.34%;top:-1.7%;object-fit:fill}
+.brand-spool-left img{left:-8.21%}
+.brand-spool-right img{left:-108.97%}
+.intro-spool{top:.8%;width:39%}
+.intro-spool-left{left:3.2%}
+.intro-spool-right{left:42.5%}
+.intro-spool img{width:256.42%;height:266.03%;top:-2.13%;object-fit:fill}
+.intro-spool-left img{left:-8.21%}
+.intro-spool-right img{left:-108.97%}
+.camera-intro.archive-logo-intro .intro-picture{left:23.35%;top:45.25%;width:40.3%;height:21.25%}
+
+/* Header v51: account for the logo's horizontal letterboxing in 96x78. */
+.brand-spool{top:.8%;width:29.3%}
+.brand-spool-left{left:14%}
+.brand-spool-right{left:44%}
+.brand-spool img{width:341.3%;height:277.3%;top:-2.2%;object-fit:contain}
+.brand-spool-left img{left:-47.78%}
+.brand-spool-right img{left:-150.17%}
+
+/* Header v52: the source artwork's right reel is smaller and sits lower. */
+.brand-spool-right{left:43.6%;top:2.4%;width:27.9%}
+.brand-spool-right img{width:358.42%;height:291.27%;left:-156.27%;top:-7%;object-fit:contain}
+
+/* Intro v53: subtle right-reel centering adjustment. */
+.intro-spool-right{left:41.8%}
+.intro-spool-right img{left:-107.18%}
+
+/* Full-page reference-led intro v54. */
+.camera-intro.archive-logo-intro{background:#eee9df}
+.camera-intro.archive-logo-intro .intro-paper{display:none}
+.camera-intro.archive-logo-intro .intro-logo-camera{position:absolute;left:50%;top:50%;width:max(100vw,177.683vh);height:max(56.282vw,100vh);aspect-ratio:1672/941;transform-origin:center;filter:none;background:url('media/archive-intro-landscape-v54.png') center/100% 100% no-repeat}
+.camera-intro.archive-logo-intro .intro-camera-mark{visibility:hidden}
+.camera-intro.archive-logo-intro .intro-spool-left{left:38.76%;top:19.77%;width:11.36%}
+.camera-intro.archive-logo-intro .intro-spool-right{left:50.06%;top:21.04%;width:10.83%}
+.camera-intro.archive-logo-intro .intro-spool-left img{width:880%;height:495.27%;left:-341.05%;top:-97.89%;object-fit:fill}
+.camera-intro.archive-logo-intro .intro-spool-right img{width:923.76%;height:519.89%;left:-462.43%;top:-109.39%;object-fit:fill}
+.camera-intro.archive-logo-intro .intro-picture{left:44.86%;top:43.89%;width:11.55%;height:10.31%}
+.camera-intro.archive-logo-intro>p{display:none}
+@keyframes intro-camera-arrive{0%{opacity:0;transform:translate(-50%,-50%) scale(.97);filter:blur(6px)}8%,90%{opacity:1;transform:translate(-50%,-50%) scale(1);filter:none}97%,100%{opacity:0;transform:translate(-50%,-50%) scale(1.015)}}
+
+/* Header v55: exposed film feeding between the animated reels. */
+.brand-logo-wrap:before{content:"";position:absolute;z-index:1;left:34.2%;top:17.8%;width:22.5%;height:21.5%;border-bottom:5px solid #17130f;border-radius:0 0 55% 48%;transform:rotate(1.5deg);pointer-events:none;filter:drop-shadow(0 1px 1px rgba(0,0,0,.28))}
+.brand-logo{z-index:0}
+.brand-spool{z-index:2}
+@media(max-width:900px){.brand-logo-wrap:before{border-bottom-width:4px}}
+
+/* Source-faithful header and painted wordmark v56. */
+.brand-logo-wrap:before{display:none}
+.brand-spool-left{left:13.1%;top:.4%;width:30.7%}
+.brand-spool-left img{width:325.73%;height:254.07%;left:-42.67%;top:-1.32%;object-fit:contain}
+.brand-spool-right{left:44.4%;top:1.8%;width:28.9%}
+.brand-spool-right img{width:346.02%;height:269.9%;left:-153.63%;top:-6.23%;object-fit:contain}
+.camera-intro.archive-logo-intro .intro-logo-camera{background-image:url('media/archive-intro-clean-v56.png')}
+.intro-wordmark{position:absolute;z-index:9;left:37.6%;top:75.6%;width:25.2%;color:#211c17;text-align:center}
+.intro-wordmark strong{display:block;font:400 3.15vh/1 "Courier New",monospace;letter-spacing:.42em;white-space:nowrap}
+.intro-wordmark i{display:block;width:100%;height:2px;margin-top:3.4vh;background:linear-gradient(90deg,#211c17 0 84%,transparent 100%);transform:rotate(.25deg)}
+.intro-wordmark strong,.intro-wordmark i{-webkit-mask-image:radial-gradient(circle,#000 52%,transparent 76%),radial-gradient(circle,#000 50%,transparent 75%),radial-gradient(circle,#000 54%,transparent 78%),radial-gradient(circle,#000 48%,transparent 76%),radial-gradient(circle,#000 52%,transparent 77%),radial-gradient(circle,#000 49%,transparent 75%);-webkit-mask-repeat:no-repeat;-webkit-mask-position:2% 35%,22% 60%,43% 28%,63% 62%,82% 34%,98% 55%;mask-image:radial-gradient(circle,#000 52%,transparent 76%),radial-gradient(circle,#000 50%,transparent 75%),radial-gradient(circle,#000 54%,transparent 78%),radial-gradient(circle,#000 48%,transparent 76%),radial-gradient(circle,#000 52%,transparent 77%),radial-gradient(circle,#000 49%,transparent 75%);mask-repeat:no-repeat;mask-position:2% 35%,22% 60%,43% 28%,63% 62%,82% 34%,98% 55%;animation:intro-wordmark-paint 2.25s 7.1s cubic-bezier(.22,.7,.24,1) both}
+.intro-wordmark i{animation-delay:7.35s}
+@keyframes intro-wordmark-paint{0%{opacity:0;filter:blur(2px);mask-size:0 0,0 0,0 0,0 0,0 0,0 0;-webkit-mask-size:0 0,0 0,0 0,0 0,0 0,0 0}15%{opacity:.65}42%{opacity:1;mask-size:55% 220%,48% 190%,42% 170%,0 0,0 0,0 0;-webkit-mask-size:55% 220%,48% 190%,42% 170%,0 0,0 0,0 0}70%{mask-size:72% 260%,68% 240%,64% 230%,58% 210%,52% 200%,44% 180%;-webkit-mask-size:72% 260%,68% 240%,64% 230%,58% 210%,52% 200%,44% 180%}100%{opacity:1;filter:none;mask-size:180% 400%,180% 400%,180% 400%,180% 400%,180% 400%,180% 400%;-webkit-mask-size:180% 400%,180% 400%,180% 400%,180% 400%,180% 400%,180% 400%}}
+@media(max-width:900px){.intro-wordmark strong{font-size:3.15vh}.intro-wordmark i{margin-top:2.6vh;height:1px}}
+
+/* Exact approved title artwork, revealed early through pigment blooms. */
+.intro-wordmark-art{position:absolute;z-index:9;inset:0;width:100%;height:100%;object-fit:fill;-webkit-mask-image:radial-gradient(circle,#000 54%,transparent 76%),radial-gradient(circle,#000 50%,transparent 75%),radial-gradient(circle,#000 53%,transparent 78%),radial-gradient(circle,#000 49%,transparent 76%),radial-gradient(circle,#000 52%,transparent 77%),radial-gradient(circle,#000 50%,transparent 75%);-webkit-mask-repeat:no-repeat;-webkit-mask-position:38% 78%,44% 76%,50% 79%,56% 76%,62% 79%,50% 84%;mask-image:radial-gradient(circle,#000 54%,transparent 76%),radial-gradient(circle,#000 50%,transparent 75%),radial-gradient(circle,#000 53%,transparent 78%),radial-gradient(circle,#000 49%,transparent 76%),radial-gradient(circle,#000 52%,transparent 77%),radial-gradient(circle,#000 50%,transparent 75%);mask-repeat:no-repeat;mask-position:38% 78%,44% 76%,50% 79%,56% 76%,62% 79%,50% 84%;animation:intro-exact-wordmark 2.8s .65s cubic-bezier(.22,.7,.24,1) both}
+@keyframes intro-exact-wordmark{0%{opacity:0;filter:blur(2px);mask-size:0 0,0 0,0 0,0 0,0 0,0 0;-webkit-mask-size:0 0,0 0,0 0,0 0,0 0,0 0}18%{opacity:.7;mask-size:12% 18%,0 0,0 0,0 0,0 0,0 0;-webkit-mask-size:12% 18%,0 0,0 0,0 0,0 0,0 0}44%{opacity:1;mask-size:18% 26%,17% 25%,16% 24%,0 0,0 0,0 0;-webkit-mask-size:18% 26%,17% 25%,16% 24%,0 0,0 0,0 0}72%{mask-size:23% 33%,22% 32%,22% 32%,20% 30%,19% 29%,17% 27%;-webkit-mask-size:23% 33%,22% 32%,22% 32%,20% 30%,19% 29%,17% 27%}100%{opacity:1;filter:none;mask-size:32% 46%,32% 46%,32% 46%,32% 46%,32% 46%,32% 46%;-webkit-mask-size:32% 46%,32% 46%,32% 46%,32% 46%,32% 46%,32% 46%}}
+
+/* Smooth high-resolution wordmark v58: compositor-only motion. */
+.intro-wordmark-art{-webkit-mask-image:none!important;mask-image:none!important;image-rendering:auto;will-change:opacity,transform;backface-visibility:hidden;transform:translateZ(0);animation:intro-wordmark-smooth 1.8s .45s cubic-bezier(.22,1,.36,1) both}
+@keyframes intro-wordmark-smooth{0%{opacity:0;transform:translate3d(0,6px,0) scale(.995)}35%{opacity:.5}100%{opacity:1;transform:translate3d(0,0,0) scale(1)}}
+
+/* Bird and audio-adjacent motion polish v60. */
+.bird-up,.bird-down{animation-timing-function:steps(1,end)}
+.bird-two b{transform:scaleX(-1)}
+@keyframes bird-up-pose{0%,3%,6%,9%,12%,15%,18%,21%,24%,27%,43%,46%,49%,69%,72%,75%,78%,81%,84%,87%,90%,93%,96%,99%{opacity:1}1.5%,4.5%,7.5%,10.5%,13.5%,16.5%,19.5%,22.5%,25.5%,28%,43.1%,44.5%,47.5%,50.5%,51%,69.1%,70.5%,73.5%,76.5%,79.5%,82.5%,85.5%,88.5%,91.5%,94.5%,97.5%,100%{opacity:0}}
+@keyframes bird-down-pose{0%,3%,6%,9%,12%,15%,18%,21%,24%,27%,43%,46%,49%,69%,72%,75%,78%,81%,84%,87%,90%,93%,96%,99%{opacity:0}1.5%,4.5%,7.5%,10.5%,13.5%,16.5%,19.5%,22.5%,25.5%,43.1%,44.5%,47.5%,50.5%,69.1%,70.5%,73.5%,76.5%,79.5%,82.5%,85.5%,88.5%,91.5%,94.5%,97.5%,100%{opacity:1}28%,43%,51%,69%{opacity:0}}
+@keyframes bird-perched-pose{0%,27.9%,43.1%,50.9%,69.1%,100%{opacity:0}28%,43%,51%,69%{opacity:1}}
+@keyframes bird-flight-two{0%{opacity:0;transform:translate(-62vw,-20vh) scale(.65) rotate(6deg)}6%{opacity:1}23%{opacity:1;transform:translate(calc(var(--land-x) - 4vw),calc(var(--land-y) - 4vh)) scale(.76) rotate(3deg)}30%,47%{opacity:1;transform:translate(var(--land-x),var(--land-y)) scale(.58)}51%{opacity:1;transform:translate(calc(var(--land-x) + 2vw),calc(var(--land-y) + var(--hop-y) - 2vh)) scale(.62) rotate(-5deg)}55%,72%{opacity:1;transform:translate(calc(var(--land-x) + var(--hop-x)),calc(var(--land-y) + var(--hop-y))) scale(.57)}76%{opacity:1;transform:translate(calc(var(--land-x) + var(--hop-x) + 3vw),calc(var(--land-y) + var(--hop-y) - 3vh)) scale(.65) rotate(10deg)}89%{opacity:1;transform:translate(110vw,-31vh) scale(.58) rotate(15deg)}92%,100%{opacity:0;transform:translate(124vw,-38vh) scale(.52) rotate(16deg)}}
+/* v61: keep wing poses synchronized through the longer, gentler departure. */
+.bird-one{animation-timing-function:linear}.bird-two{animation-timing-function:linear}.bird-two b{animation-delay:0s}
+@keyframes bird-flight-one{0%{opacity:0;transform:translate(58vw,-28vh) scale(.72) rotate(-8deg)}5%{opacity:1}22%{opacity:1;transform:translate(calc(var(--land-x) + 6vw),calc(var(--land-y) - 5vh)) scale(.82) rotate(-4deg)}28%,43%{opacity:1;transform:translate(var(--land-x),var(--land-y)) scale(.62)}47%{opacity:1;transform:translate(calc(var(--land-x) + 2vw),calc(var(--land-y) + var(--hop-y) - 2vh)) scale(.66) rotate(-4deg)}51%,69%{opacity:1;transform:translate(calc(var(--land-x) + var(--hop-x)),calc(var(--land-y) + var(--hop-y))) scale(.6)}73%{opacity:1;transform:translate(calc(var(--land-x) + var(--hop-x) + 2vw),calc(var(--land-y) + var(--hop-y) - 2vh)) scale(.66) rotate(-7deg)}88%{opacity:1;transform:translate(-42vw,-18vh) scale(.62) rotate(-12deg)}96%{opacity:1;transform:translate(-108vw,-29vh) scale(.56) rotate(-15deg)}98%,100%{opacity:0;transform:translate(-120vw,-34vh) scale(.53) rotate(-16deg)}}
+@keyframes bird-flight-two{0%{opacity:0;transform:translate(-62vw,-20vh) scale(.65) rotate(6deg)}6%{opacity:1}23%{opacity:1;transform:translate(calc(var(--land-x) - 4vw),calc(var(--land-y) - 4vh)) scale(.76) rotate(3deg)}30%,47%{opacity:1;transform:translate(var(--land-x),var(--land-y)) scale(.58)}51%{opacity:1;transform:translate(calc(var(--land-x) + 2vw),calc(var(--land-y) + var(--hop-y) - 2vh)) scale(.62) rotate(-5deg)}55%,72%{opacity:1;transform:translate(calc(var(--land-x) + var(--hop-x)),calc(var(--land-y) + var(--hop-y))) scale(.57)}76%{opacity:1;transform:translate(calc(var(--land-x) + var(--hop-x) + 2vw),calc(var(--land-y) + var(--hop-y) - 2vh)) scale(.64) rotate(7deg)}89%{opacity:1;transform:translate(42vw,-18vh) scale(.61) rotate(12deg)}96%{opacity:1;transform:translate(110vw,-31vh) scale(.55) rotate(15deg)}98%,100%{opacity:0;transform:translate(122vw,-36vh) scale(.52) rotate(16deg)}}
+/* v62: visible wire perches and a constant, unhurried off-screen flight. */
+.hero-birds{z-index:6}
+@keyframes bird-flight-one{0%{opacity:0;transform:translate(58vw,-28vh) scale(.72) rotate(-8deg)}5%{opacity:1}22%{opacity:1;transform:translate(calc(var(--land-x) + 6vw),calc(var(--land-y) - 5vh)) scale(.82) rotate(-4deg)}28%,43%{opacity:1;transform:translate(var(--land-x),var(--land-y)) scale(.62)}47%{opacity:1;transform:translate(calc(var(--land-x) + 2vw),calc(var(--land-y) + var(--hop-y) - 2vh)) scale(.66) rotate(-4deg)}51%,69%{opacity:1;transform:translate(calc(var(--land-x) + var(--hop-x)),calc(var(--land-y) + var(--hop-y))) scale(.6)}73%{opacity:1;transform:translate(calc(var(--land-x) + var(--hop-x) + 2vw),calc(var(--land-y) + var(--hop-y) - 2vh)) scale(.66) rotate(-7deg)}88%{opacity:1;transform:translate(-35vw,-17vh) scale(.62) rotate(-11deg)}96%{opacity:1;transform:translate(-65vw,-25vh) scale(.57) rotate(-14deg)}98%,100%{opacity:0;transform:translate(-72vw,-29vh) scale(.54) rotate(-15deg)}}
+@keyframes bird-flight-two{0%{opacity:0;transform:translate(-62vw,-20vh) scale(.65) rotate(6deg)}6%{opacity:1}23%{opacity:1;transform:translate(calc(var(--land-x) - 4vw),calc(var(--land-y) - 4vh)) scale(.76) rotate(3deg)}30%,47%{opacity:1;transform:translate(var(--land-x),var(--land-y)) scale(.58)}51%{opacity:1;transform:translate(calc(var(--land-x) + 2vw),calc(var(--land-y) + var(--hop-y) - 2vh)) scale(.62) rotate(-5deg)}55%,72%{opacity:1;transform:translate(calc(var(--land-x) + var(--hop-x)),calc(var(--land-y) + var(--hop-y))) scale(.57)}76%{opacity:1;transform:translate(calc(var(--land-x) + var(--hop-x) + 2vw),calc(var(--land-y) + var(--hop-y) - 2vh)) scale(.64) rotate(7deg)}89%{opacity:1;transform:translate(35vw,-17vh) scale(.61) rotate(11deg)}96%{opacity:1;transform:translate(65vw,-25vh) scale(.56) rotate(14deg)}98%,100%{opacity:0;transform:translate(72vw,-29vh) scale(.53) rotate(15deg)}}
+/* v63: one tap starts the animation and its real soundtrack in lockstep. */
+.archive-logo-intro{pointer-events:none;cursor:default}.intro-sound{display:none!important}
+.hero-birds{z-index:3}
+@keyframes bird-flight-one{0%{opacity:0;transform:translate(58vw,-28vh) scale(.72) rotate(-8deg)}5%{opacity:1}22%{opacity:1;transform:translate(calc(var(--land-x) + 6vw),calc(var(--land-y) - 5vh)) scale(.82) rotate(-4deg)}28%,43%{opacity:1;transform:translate(var(--land-x),var(--land-y)) scale(.62)}46%{opacity:1;transform:translate(calc(var(--land-x) + 2vw),calc(var(--land-y) + var(--hop-y) - 2vh)) scale(.66) rotate(-4deg)}51%,69%{opacity:1;transform:translate(calc(var(--land-x) + var(--hop-x)),calc(var(--land-y) + var(--hop-y))) scale(.6)}73%{opacity:1;transform:translate(calc(var(--land-x) + var(--hop-x) + 2vw),calc(var(--land-y) + var(--hop-y) - 2vh)) scale(.66) rotate(-7deg)}88%{opacity:1;transform:translate(-35vw,-17vh) scale(.62) rotate(-11deg)}96%{opacity:1;transform:translate(-65vw,-25vh) scale(.57) rotate(-14deg)}98%,100%{opacity:0;transform:translate(-72vw,-29vh) scale(.54) rotate(-15deg)}}
+@keyframes bird-flight-two{0%{opacity:0;transform:translate(-62vw,-20vh) scale(.65) rotate(6deg)}6%{opacity:1}23%{opacity:1;transform:translate(calc(var(--land-x) - 4vw),calc(var(--land-y) - 4vh)) scale(.76) rotate(3deg)}28%,47%{opacity:1;transform:translate(var(--land-x),var(--land-y)) scale(.58)}50%{opacity:1;transform:translate(calc(var(--land-x) + 2vw),calc(var(--land-y) + var(--hop-y) - 2vh)) scale(.62) rotate(-5deg)}55%,72%{opacity:1;transform:translate(calc(var(--land-x) + var(--hop-x)),calc(var(--land-y) + var(--hop-y))) scale(.57)}76%{opacity:1;transform:translate(calc(var(--land-x) + var(--hop-x) + 2vw),calc(var(--land-y) + var(--hop-y) - 2vh)) scale(.64) rotate(7deg)}89%{opacity:1;transform:translate(35vw,-17vh) scale(.61) rotate(11deg)}96%{opacity:1;transform:translate(65vw,-25vh) scale(.56) rotate(14deg)}98%,100%{opacity:0;transform:translate(72vw,-29vh) scale(.53) rotate(15deg)}}
+/* v72: let the finished intro breathe before its closing dissolve. */
+.camera-intro.archive-logo-intro{animation-duration:12s}
+.camera-intro.archive-logo-intro .intro-logo-camera{animation-duration:11.65s}
+.camera-intro.archive-logo-intro .intro-knight{animation:intro-knight-closing-hold 5.35s 6.4s ease-out both!important}
+@keyframes intro-knight-closing-hold{0%,82%{opacity:1}100%{opacity:0}}
+/* v74: restrained living-painting movement after each pigment reveal begins. */
+.camera-intro.archive-logo-intro .intro-western .scene-pencil{transform-origin:52% 72%;animation:intro-pigment-dabs 3.2s cubic-bezier(.22,.7,.24,1) both,intro-western-figure-motion 3.2s ease-in-out both,intro-base-handoff .18s 2.08s both!important}
+.camera-intro.archive-logo-intro .intro-samurai .scene-pencil{transform-origin:50% 68%;animation:intro-pigment-dabs 3.2s 3.2s cubic-bezier(.22,.7,.24,1) both,intro-samurai-figure-motion 3.2s 3.2s ease-in-out both,intro-base-handoff .18s 5.28s both!important}
+.camera-intro.archive-logo-intro .intro-knight .scene-pencil{transform-origin:52% 70%;animation:intro-pigment-dabs 3.2s 6.4s cubic-bezier(.22,.7,.24,1) both,intro-knight-figure-motion 5.35s 6.4s ease-in-out both,intro-base-handoff .18s 8.48s both!important}
+@keyframes intro-western-figure-motion{0%,30%{transform:scale(1.015) translate3d(-1.2%,.7%,0) rotate(-.25deg)}48%{transform:scale(1.025) translate3d(.9%,-.8%,0) rotate(.38deg)}66%{transform:scale(1.018) translate3d(-.45%,.25%,0) rotate(-.12deg)}84%{transform:scale(1.028) translate3d(.65%,-.6%,0) rotate(.22deg)}100%{transform:scale(1.02) translate3d(.15%,-.25%,0)}}
+@keyframes intro-samurai-figure-motion{0%,26%{transform:scale(1.012) translate3d(1.25%,.65%,0) rotate(.28deg)}43%{transform:scale(1.032) translate3d(-1.35%,-1.05%,0) rotate(-.48deg)}60%{transform:scale(1.02) translate3d(.55%,.15%,0) rotate(.16deg)}76%{transform:scale(1.035) translate3d(-.9%,-.75%,0) rotate(-.32deg)}100%{transform:scale(1.02) translate3d(-.15%,-.3%,0)}}
+@keyframes intro-knight-figure-motion{0%,18%{transform:scale(1.012) translate3d(-.8%,.85%,0) rotate(-.18deg)}34%{transform:scale(1.026) translate3d(.9%,-1.05%,0) rotate(.34deg)}50%{transform:scale(1.016) translate3d(-.45%,.5%,0) rotate(-.14deg)}66%{transform:scale(1.029) translate3d(.7%,-.8%,0) rotate(.25deg)}82%{transform:scale(1.018) translate3d(-.2%,.1%,0)}100%{transform:scale(1.02) translate3d(.12%,-.3%,0)}}
+/* v76: individual transparent silhouette layers create visible character action. */
+.camera-intro.archive-logo-intro .intro-scene .moving-figure{position:absolute;z-index:4;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;clip-path:var(--figure-clip);-webkit-mask:none!important;mask:none!important;filter:sepia(.06) contrast(1.04) brightness(.98);transform-origin:center bottom;animation:intro-figure-enter .18s 2.08s both,intro-figure-action 1.08s 2.1s ease-in-out infinite!important}
+.camera-intro.archive-logo-intro .intro-samurai .moving-figure{animation-delay:5.28s,5.3s!important}
+.camera-intro.archive-logo-intro .intro-knight .moving-figure{animation-delay:8.48s,8.5s!important}
+.camera-intro.archive-logo-intro .moving-figure-2{animation-name:intro-figure-enter,intro-figure-action-reverse!important;animation-duration:.18s,1.16s!important}
+.camera-intro.archive-logo-intro .intro-samurai .moving-figure-3{animation-duration:.18s,.92s!important}.camera-intro.archive-logo-intro .intro-samurai .moving-figure-4{animation-duration:.18s,1.24s!important}
+@keyframes intro-figure-enter{to{opacity:1}}
+@keyframes intro-base-handoff{to{opacity:0}}
+@keyframes intro-figure-action{0%,100%{transform:translate3d(-1.2%,.7%,0) rotate(-.45deg)}45%{transform:translate3d(2.2%,-1.8%,0) rotate(1.1deg)}70%{transform:translate3d(.3%,-.5%,0) rotate(.15deg)}}
+@keyframes intro-figure-action-reverse{0%,100%{transform:translate3d(1.1%,.65%,0) rotate(.4deg)}42%{transform:translate3d(-2.1%,-1.65%,0) rotate(-1deg)}72%{transform:translate3d(-.25%,-.35%,0) rotate(-.12deg)}}
+
+/* v77: hand-painted pose sprites provide readable character action. */
+.camera-intro.archive-logo-intro .moving-figure{display:none!important}
+.camera-intro.archive-logo-intro .sprite-rig{position:absolute;z-index:5;inset:0;overflow:hidden;pointer-events:none;opacity:0}
+.camera-intro.archive-logo-intro .sprite-rig img{position:absolute;display:block;object-fit:contain;filter:sepia(.08) contrast(1.08);image-rendering:auto}
+.western-rig{animation:rig-show .12s 2.02s both}.samurai-rig{animation:rig-show .12s 5.22s both}.knight-rig{animation:rig-show .12s 8.42s both}
+@keyframes rig-show{to{opacity:1}}
+.western-rig .cowboy{bottom:3%;width:44%;height:88%;opacity:0}.western-rig .left{left:4%}.western-rig .right{right:3%;transform:scaleX(-1)}
+.western-rig .left.neutral{animation:cowboy-left-neutral 3.2s steps(1,end) both}.western-rig .left.firing{animation:cowboy-left-fire 3.2s steps(1,end) both}.western-rig .right.neutral{animation:cowboy-right-neutral 3.2s steps(1,end) both}.western-rig .right.hit{animation:cowboy-right-hit 3.2s steps(1,end) both}
+@keyframes cowboy-left-neutral{0%,65%{opacity:1}66%,100%{opacity:0}}@keyframes cowboy-left-fire{0%,65%{opacity:0}66%,100%{opacity:1;transform:translateY(-1%) rotate(-2deg)}}
+@keyframes cowboy-right-neutral{0%,70%{opacity:1}71%,100%{opacity:0}}@keyframes cowboy-right-hit{0%,70%{opacity:0}71%,100%{opacity:1;transform:scaleX(-1) translate(5%,4%) rotate(13deg)}}
+.samurai-rig .samurai-pose{inset:2% 8%;width:84%;height:96%;opacity:0;transform-origin:50% 86%}.samurai-rig .pose-1{animation:samurai-one 3.2s 3.2s steps(1,end) both}.samurai-rig .pose-2{animation:samurai-two 3.2s 3.2s steps(1,end) both}.samurai-rig .pose-3{animation:samurai-three 3.2s 3.2s steps(1,end) both}.samurai-rig .pose-4{animation:samurai-four 3.2s 3.2s steps(1,end) both}
+@keyframes samurai-one{0%,18%,49%,72%,100%{opacity:1}19%,48%,50%,71%{opacity:0}}@keyframes samurai-two{0%,18%,50%,100%{opacity:0}19%,34%{opacity:1;transform:rotate(-3deg)}35%,49%{opacity:0}}@keyframes samurai-three{0%,34%,72%,100%{opacity:0}35%,49%,73%,86%{opacity:1;transform:rotate(3deg)}50%,71%,87%{opacity:0}}@keyframes samurai-four{0%,49%,87%,100%{opacity:0}50%,71%,88%,99%{opacity:1;transform:translateY(-1%) rotate(-2deg)}}
+.knight-rig .horse-pose{left:1%;bottom:1%;width:72%;height:96%;opacity:0;transform-origin:57% 85%}.knight-rig .princess-sprite{right:4%;bottom:3%;width:28%;height:83%;animation:princess-arrive .2s 8.45s both}
+.knight-rig .horse-pose.neutral{animation:horse-neutral 5.35s 6.4s steps(1,end) both}.knight-rig .horse-pose.gallop{animation:horse-gallop 5.35s 6.4s steps(1,end) both}.knight-rig .horse-pose.stride{animation:horse-stride 5.35s 6.4s steps(1,end) both}.knight-rig .horse-pose.bow{animation:horse-bow 5.35s 6.4s steps(1,end) both}
+@keyframes princess-arrive{from{opacity:0}to{opacity:1}}@keyframes horse-neutral{0%,39%{opacity:1;transform:translateX(-4%)}40%,100%{opacity:0}}@keyframes horse-gallop{0%,18%,29%,100%{opacity:0}19%,28%{opacity:1;transform:translateX(2%)}}@keyframes horse-stride{0%,28%,40%,100%{opacity:0}29%,39%{opacity:1;transform:translateX(7%)}}@keyframes horse-bow{0%,39%{opacity:0}40%,100%{opacity:1;transform:translateX(12%) rotate(1deg)}}
+
+/* v78: exclusive pose cuts and a proper off-frame horse entrance. */
+.camera-intro.archive-logo-intro .sprite-rig img{visibility:hidden;opacity:0}
+.camera-intro.archive-logo-intro .western-rig .cowboy,
+.camera-intro.archive-logo-intro .samurai-rig .samurai-pose,
+.camera-intro.archive-logo-intro .knight-rig .horse-pose,
+.camera-intro.archive-logo-intro .knight-rig .princess-sprite{animation-timing-function:steps(1,end)!important}
+@keyframes cowboy-left-neutral{0%,65.99%{visibility:visible;opacity:1}66%,100%{visibility:hidden;opacity:0}}
+@keyframes cowboy-left-fire{0%,65.99%{visibility:hidden;opacity:0}66%,100%{visibility:visible;opacity:1;transform:translateY(-1%) rotate(-2deg)}}
+@keyframes cowboy-right-neutral{0%,70.99%{visibility:visible;opacity:1}71%,100%{visibility:hidden;opacity:0}}
+@keyframes cowboy-right-hit{0%,70.99%{visibility:hidden;opacity:0}71%,100%{visibility:visible;opacity:1;transform:scaleX(-1) translate(5%,4%) rotate(13deg)}}
+@keyframes samurai-one{0%,18.99%{visibility:visible;opacity:1}19%,99.99%{visibility:hidden;opacity:0}100%{visibility:visible;opacity:1}}
+@keyframes samurai-two{0%,18.99%{visibility:hidden;opacity:0}19%,34.99%{visibility:visible;opacity:1;transform:rotate(-3deg)}35%,100%{visibility:hidden;opacity:0}}
+@keyframes samurai-three{0%,34.99%{visibility:hidden;opacity:0}35%,49.99%{visibility:visible;opacity:1;transform:rotate(3deg)}50%,72.99%{visibility:hidden;opacity:0}73%,86.99%{visibility:visible;opacity:1;transform:rotate(3deg)}87%,100%{visibility:hidden;opacity:0}}
+@keyframes samurai-four{0%,49.99%{visibility:hidden;opacity:0}50%,72.99%{visibility:visible;opacity:1;transform:translateY(-1%) rotate(-2deg)}73%,86.99%{visibility:hidden;opacity:0}87%,99.99%{visibility:visible;opacity:1;transform:translateY(-1%) rotate(-2deg)}100%{visibility:hidden;opacity:0}}
+.knight-rig .horse-pose{left:-7%;width:72%;animation-duration:3.05s!important;animation-delay:8.42s!important}.knight-rig .princess-sprite{visibility:visible;animation-delay:9.38s!important}
+@keyframes princess-arrive{0%{visibility:hidden;opacity:0}100%{visibility:visible;opacity:1}}
+@keyframes horse-neutral{0%,18.99%{visibility:visible;opacity:1;transform:translateX(-38%)}19%,100%{visibility:hidden;opacity:0}}
+@keyframes horse-gallop{0%,18.99%{visibility:hidden;opacity:0}19%,28.99%{visibility:visible;opacity:1;transform:translateX(-15%)}29%,39.99%{visibility:hidden;opacity:0}40%,100%{visibility:hidden;opacity:0}}
+@keyframes horse-stride{0%,28.99%{visibility:hidden;opacity:0}29%,39.99%{visibility:visible;opacity:1;transform:translateX(8%)}40%,100%{visibility:hidden;opacity:0}}
+@keyframes horse-bow{0%,39.99%{visibility:hidden;opacity:0}40%,100%{visibility:visible;opacity:1;transform:translateX(25%) rotate(1deg)}}
+
+/* v87: the medieval sprite scene starts immediately, without the old horse still. */
+.camera-intro.archive-logo-intro .knight-rig{animation:rig-show .12s 6.4s both}
+.camera-intro.archive-logo-intro .knight-rig .horse-pose{animation-duration:4.9s!important;animation-delay:6.4s!important}
+.camera-intro.archive-logo-intro .knight-rig .princess-sprite{animation-delay:6.4s!important}
+.camera-intro.archive-logo-intro .intro-knight .scene-pencil{animation:intro-original-off 0s 6.4s step-end forwards!important}
+
+/* v88: isolated medieval sprites; no neighboring sheet frames. */
+.camera-intro.archive-logo-intro .knight-rig .princess-sprite{visibility:visible!important;opacity:1!important;animation:none!important;right:0;bottom:0;width:31%;height:96%}
+
+/* v89: true stepped drawings replace transform-only samurai and horse motion. */
+.camera-intro.archive-logo-intro .samurai-rig{animation:rig-show .12s 4.2s both}
+.camera-intro.archive-logo-intro .intro-samurai .scene-pencil{animation:intro-pigment-dabs 3.2s 3.2s cubic-bezier(.22,.7,.24,1) both,intro-original-off 0s 4.2s step-end forwards!important}
+.camera-intro.archive-logo-intro .samurai-action-frame{inset:0;width:100%;height:100%;object-fit:contain;visibility:hidden;opacity:0;animation-duration:2.2s!important;animation-delay:4.2s!important;animation-timing-function:steps(1,end)!important;animation-fill-mode:both!important}
+.samurai-action-frame.frame-1{animation-name:samurai-frame-1!important}.samurai-action-frame.frame-2{animation-name:samurai-frame-2!important}.samurai-action-frame.frame-3{animation-name:samurai-frame-3!important}.samurai-action-frame.frame-4{animation-name:samurai-frame-4!important}.samurai-action-frame.frame-5{animation-name:samurai-frame-5!important}.samurai-action-frame.frame-6{animation-name:samurai-frame-6!important}
+@keyframes samurai-frame-1{0%,16.65%{visibility:visible;opacity:1}16.66%,100%{visibility:hidden;opacity:0}}@keyframes samurai-frame-2{0%,16.65%{visibility:hidden;opacity:0}16.66%,33.32%{visibility:visible;opacity:1}33.33%,100%{visibility:hidden;opacity:0}}@keyframes samurai-frame-3{0%,33.32%{visibility:hidden;opacity:0}33.33%,49.99%{visibility:visible;opacity:1}50%,100%{visibility:hidden;opacity:0}}@keyframes samurai-frame-4{0%,49.99%{visibility:hidden;opacity:0}50%,66.65%{visibility:visible;opacity:1}66.66%,100%{visibility:hidden;opacity:0}}@keyframes samurai-frame-5{0%,66.65%{visibility:hidden;opacity:0}66.66%,83.32%{visibility:visible;opacity:1}83.33%,100%{visibility:hidden;opacity:0}}@keyframes samurai-frame-6{0%,83.32%{visibility:hidden;opacity:0}83.33%,100%{visibility:visible;opacity:1}}
+.camera-intro.archive-logo-intro .horse-action-frame{left:-8%;bottom:1%;width:73%;height:96%;object-fit:contain;visibility:hidden;opacity:0;animation-duration:4.9s!important;animation-delay:6.4s!important;animation-timing-function:steps(1,end)!important;animation-fill-mode:both!important}
+.horse-action-frame.frame-1{animation-name:horse-frame-1!important}.horse-action-frame.frame-2{animation-name:horse-frame-2!important}.horse-action-frame.frame-3{animation-name:horse-frame-3!important}.horse-action-frame.frame-4{animation-name:horse-frame-4!important}.horse-action-frame.frame-5{animation-name:horse-frame-5!important}.horse-action-frame.frame-6{animation-name:horse-frame-6!important}
+@keyframes horse-frame-1{0%,16.65%{visibility:visible;opacity:1;transform:translateX(-115%)}16.66%,100%{visibility:hidden;opacity:0}}@keyframes horse-frame-2{0%,16.65%{visibility:hidden;opacity:0}16.66%,33.32%{visibility:visible;opacity:1;transform:translateX(-68%)}33.33%,100%{visibility:hidden;opacity:0}}@keyframes horse-frame-3{0%,33.32%{visibility:hidden;opacity:0}33.33%,49.99%{visibility:visible;opacity:1;transform:translateX(-28%)}50%,100%{visibility:hidden;opacity:0}}@keyframes horse-frame-4{0%,49.99%{visibility:hidden;opacity:0}50%,66.65%{visibility:visible;opacity:1;transform:translateX(2%)}66.66%,100%{visibility:hidden;opacity:0}}@keyframes horse-frame-5{0%,66.65%{visibility:hidden;opacity:0}66.66%,83.32%{visibility:visible;opacity:1;transform:translateX(18%)}83.33%,100%{visibility:hidden;opacity:0}}@keyframes horse-frame-6{0%,83.32%{visibility:hidden;opacity:0}83.33%,100%{visibility:visible;opacity:1;transform:translateX(18%)}}
+
+/* v90: exclusive eight-drawing cinematic sequences. */
+.camera-intro.archive-logo-intro .sequence-rig{opacity:0}
+.camera-intro.archive-logo-intro .western-rig.sequence-rig{animation:rig-show .08s .75s both}
+.camera-intro.archive-logo-intro .samurai-rig.sequence-rig{animation:rig-show .08s 3.65s both}
+.camera-intro.archive-logo-intro .knight-rig.sequence-rig{animation:rig-show .08s 6.4s both}
+.camera-intro.archive-logo-intro .sequence-rig .scene-sequence-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;visibility:visible!important;opacity:1!important;transform:none!important;animation:none!important;filter:sepia(.06) contrast(1.08)}
+.camera-intro.archive-logo-intro .intro-western .scene-pencil{animation:intro-pigment-dabs 3.2s cubic-bezier(.22,.7,.24,1) both,intro-original-off 0s .75s step-end forwards!important}
+.camera-intro.archive-logo-intro .intro-samurai .scene-pencil{animation:intro-pigment-dabs 3.2s 3.2s cubic-bezier(.22,.7,.24,1) both,intro-original-off 0s 3.65s step-end forwards!important}
+.camera-intro.archive-logo-intro .intro-knight .scene-pencil{animation:intro-original-off 0s 6.4s step-end forwards!important}
+
+/* v79: remove the finished still painting when its animated rig takes over. */
+.camera-intro.archive-logo-intro .intro-western .scene-pencil{animation:intro-pigment-dabs 3.2s cubic-bezier(.22,.7,.24,1) both,intro-original-off 0s 2.02s step-end forwards!important}
+.camera-intro.archive-logo-intro .intro-samurai .scene-pencil{animation:intro-pigment-dabs 3.2s 3.2s cubic-bezier(.22,.7,.24,1) both,intro-original-off 0s 5.22s step-end forwards!important}
+.camera-intro.archive-logo-intro .intro-knight .scene-pencil{animation:intro-pigment-dabs 3.2s 6.4s cubic-bezier(.22,.7,.24,1) both,intro-original-off 0s 8.42s step-end forwards!important}
+@keyframes intro-original-off{to{visibility:hidden;opacity:0}}
+
+/* v80: separately staged fighters and corrected western orientation. */
+.camera-intro.archive-logo-intro .western-rig .right{transform:none}
+.camera-intro.archive-logo-intro .western-rig .right.hit{transform:translate(-5%,4%) rotate(-13deg)}
+@keyframes cowboy-right-hit{0%,70.99%{visibility:hidden;opacity:0;transform:none}71%,100%{visibility:visible;opacity:1;transform:translate(-7%,5%) rotate(-18deg)}}
+
+/* v86: princess establishes the frame before the horseman enters. */
+.camera-intro.archive-logo-intro .knight-rig .princess-sprite{right:-1%;bottom:0;width:34%;height:98%;object-fit:contain;animation-delay:8.42s!important}
+@keyframes horse-neutral{0%,18.99%{visibility:visible;opacity:1;transform:translateX(-125%)}19%,100%{visibility:hidden;opacity:0}}
+@keyframes horse-gallop{0%,18.99%{visibility:hidden;opacity:0}19%,28.99%{visibility:visible;opacity:1;transform:translateX(-62%)}29%,100%{visibility:hidden;opacity:0}}
+@keyframes horse-stride{0%,28.99%{visibility:hidden;opacity:0}29%,39.99%{visibility:visible;opacity:1;transform:translateX(-8%)}40%,100%{visibility:hidden;opacity:0}}
+@keyframes horse-bow{0%,39.99%{visibility:hidden;opacity:0}40%,100%{visibility:visible;opacity:1;transform:translateX(25%) rotate(1deg)}}
+.camera-intro.archive-logo-intro .samurai-rig .samurai-pose{inset:auto;bottom:3%;width:27%;height:91%;visibility:visible;opacity:1;transform-origin:50% 88%}
+.camera-intro.archive-logo-intro .samurai-rig .pose-1{left:0;animation:samurai-fighter-one 1.05s 5.22s ease-in-out infinite alternate both!important}
+.camera-intro.archive-logo-intro .samurai-rig .pose-2{left:24%;animation:samurai-fighter-two .86s 5.22s ease-in-out infinite alternate both!important}
+.camera-intro.archive-logo-intro .samurai-rig .pose-3{left:49%;animation:samurai-fighter-three .98s 5.22s ease-in-out infinite alternate both!important}
+.camera-intro.archive-logo-intro .samurai-rig .pose-4{left:73%;animation:samurai-fighter-four .9s 5.22s ease-in-out infinite alternate both!important}
+@keyframes samurai-fighter-one{from{visibility:visible;opacity:1;transform:translate(-2%,1%) rotate(-3deg)}to{visibility:visible;opacity:1;transform:translate(5%,-2%) rotate(5deg)}}
+@keyframes samurai-fighter-two{from{visibility:visible;opacity:1;transform:translate(2%,0) rotate(4deg)}to{visibility:visible;opacity:1;transform:translate(-5%,-2%) rotate(-5deg)}}
+@keyframes samurai-fighter-three{from{visibility:visible;opacity:1;transform:translate(-2%,-1%) rotate(-4deg)}to{visibility:visible;opacity:1;transform:translate(4%,1%) rotate(5deg)}}
+@keyframes samurai-fighter-four{from{visibility:visible;opacity:1;transform:translate(3%,1%) rotate(3deg)}to{visibility:visible;opacity:1;transform:translate(-4%,-2%) rotate(-5deg)}}
+
+/* v91: 24 fps story direction, readable impacts, and self-contained endings. */
+.camera-intro.archive-logo-intro .sequence-rig .scene-sequence-frame{display:block!important;visibility:hidden!important;opacity:0!important;transform:translate3d(var(--drift-x,0),var(--drift-y,0),0) scale(1.012)!important;transition:opacity 42ms linear;will-change:transform,opacity}
+.camera-intro.archive-logo-intro .sequence-rig .scene-sequence-frame.is-current{visibility:visible!important;opacity:1!important}
+.camera-intro.archive-logo-intro .sequence-rig{isolation:isolate}
+.camera-intro.archive-logo-intro .story-flash{position:absolute;z-index:7;width:10%;aspect-ratio:1;left:43%;top:39%;border-radius:50%;pointer-events:none;opacity:0;background:radial-gradient(circle,#fff 0,#ffd47a 11%,rgba(255,126,20,.75) 22%,transparent 68%);mix-blend-mode:screen}
+.camera-intro.archive-logo-intro .samurai-rig .story-flash{left:51%;top:42%;background:radial-gradient(ellipse,#fff 0,#e8f5ff 12%,rgba(181,217,235,.68) 25%,transparent 68%)}
+.camera-intro.archive-logo-intro .is-impact .story-flash{animation:story-impact 167ms steps(4,end) both}
+.camera-intro.archive-logo-intro .blood-spray{position:absolute;z-index:6;width:15%;height:18%;opacity:0;pointer-events:none;filter:drop-shadow(0 1px 1px rgba(55,0,0,.35));background:radial-gradient(ellipse at 18% 55%,#71100d 0 5%,transparent 6%),radial-gradient(ellipse at 42% 27%,#9a1711 0 4%,transparent 5%),radial-gradient(ellipse at 65% 62%,#64100d 0 7%,transparent 8%),radial-gradient(ellipse at 88% 35%,#a11c14 0 3%,transparent 4%);clip-path:polygon(0 40%,100% 0,87% 42%,100% 70%,58% 62%,22% 100%);transform-origin:left center}
+.camera-intro.archive-logo-intro .blood-western{left:66%;top:43%;transform:rotate(-12deg)}
+.camera-intro.archive-logo-intro .blood-samurai{left:47%;top:48%;transform:rotate(16deg)}
+.camera-intro.archive-logo-intro .is-blood .blood-spray{animation:blood-release .48s cubic-bezier(.12,.7,.18,1) both}
+.camera-intro.archive-logo-intro .blood-pool{position:absolute;z-index:4;width:17%;height:4%;border-radius:50%;opacity:0;background:radial-gradient(ellipse,#5b0c0a 0,#73100d 45%,rgba(65,7,6,.18) 72%,transparent 74%);filter:blur(.35px);transform:scaleX(.08)}
+.camera-intro.archive-logo-intro .blood-pool-western{right:9%;bottom:13%}.camera-intro.archive-logo-intro .blood-pool-samurai{left:38%;bottom:11%}
+.camera-intro.archive-logo-intro .is-dying .blood-pool{animation:blood-pool-grow 1.05s ease-out both}
+.camera-intro.archive-logo-intro .is-dying .scene-sequence-frame.is-current{filter:sepia(.08) contrast(1.1) brightness(.88)!important}
+.camera-intro.archive-logo-intro .story-glow{position:absolute;z-index:3;right:10%;bottom:8%;width:38%;height:52%;opacity:0;background:radial-gradient(ellipse,rgba(255,211,133,.22),transparent 69%);mix-blend-mode:screen}
+.camera-intro.archive-logo-intro .is-resolved .story-glow{animation:homecoming-glow 1.6s ease-out both}
+@keyframes story-impact{0%{opacity:0;transform:scale(.2)}25%{opacity:1;transform:scale(1.5)}50%{opacity:.22;transform:scale(2.1)}100%{opacity:0;transform:scale(2.8)}}
+@keyframes blood-release{0%{opacity:0;transform:rotate(var(--blood-angle,0deg)) scale(.08,.2)}22%{opacity:.92}68%{opacity:.62}100%{opacity:0;transform:rotate(var(--blood-angle,0deg)) scale(1.2,.8) translateX(8%)}}
+@keyframes blood-pool-grow{0%{opacity:0;transform:scaleX(.08)}35%{opacity:.74}100%{opacity:.82;transform:scaleX(1)}}
+@keyframes homecoming-glow{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1.08)}}
+@media(prefers-reduced-motion:reduce){.camera-intro.archive-logo-intro .blood-spray,.camera-intro.archive-logo-intro .blood-pool,.camera-intro.archive-logo-intro .story-flash{animation:none!important}}
+
+/* v92: preserve the original paintings; improve only acting, framing, and motion. */
+.camera-intro.archive-logo-intro{animation-duration:16.4s!important}
+.camera-intro.archive-logo-intro .intro-logo-camera{animation-duration:16.05s!important}
+.camera-intro.archive-logo-intro .intro-western{animation:intro-story-western-v92 4.2s .65s steps(1,end) both!important}
+.camera-intro.archive-logo-intro .intro-samurai{animation:intro-story-samurai-v92 4.2s 4.85s steps(1,end) both!important}
+.camera-intro.archive-logo-intro .intro-knight{animation:intro-story-knight-v92 6.3s 9.05s steps(1,end) both!important}
+.camera-intro.archive-logo-intro .western-rig.sequence-rig{animation:rig-show .08s .65s both}
+.camera-intro.archive-logo-intro .samurai-rig.sequence-rig{animation:rig-show .08s 4.85s both}
+.camera-intro.archive-logo-intro .knight-rig.sequence-rig{animation:rig-show .08s 9.05s both}
+.camera-intro.archive-logo-intro .sequence-rig .scene-sequence-frame{visibility:hidden!important;opacity:0!important;transform:translate3d(var(--story-x,0),var(--story-y,0),0) scale(var(--story-zoom,1.3)) rotate(var(--story-rotate,0deg))!important;transform-origin:50% 62%;transition:none!important;filter:sepia(.06) contrast(1.08)!important}
+.camera-intro.archive-logo-intro .sequence-rig .scene-sequence-frame.is-current,.camera-intro.archive-logo-intro .sequence-rig .scene-sequence-frame.is-incoming{visibility:visible!important;opacity:var(--frame-opacity,1)!important}
+.camera-intro.archive-logo-intro .intro-western .scene-pencil{animation:intro-original-off 0s .65s step-end forwards!important}
+.camera-intro.archive-logo-intro .intro-samurai .scene-pencil{animation:intro-original-off 0s 4.85s step-end forwards!important}
+.camera-intro.archive-logo-intro .intro-knight .scene-pencil{animation:intro-original-off 0s 9.05s step-end forwards!important}
+.camera-intro.archive-logo-intro .blood-western{left:63%;top:38%}.camera-intro.archive-logo-intro .blood-samurai{left:50%;top:40%}
+.camera-intro.archive-logo-intro .blood-pool-western{right:4%;bottom:5%}.camera-intro.archive-logo-intro .blood-pool-samurai{left:34%;bottom:4%}
+@keyframes intro-story-western-v92{0%,99.8%{opacity:1}100%{opacity:0}}
+@keyframes intro-story-samurai-v92{0%,99.8%{opacity:1}100%{opacity:0}}
+@keyframes intro-story-knight-v92{0%,92%{opacity:1}100%{opacity:0}}
+
+/* v93: longer character intentions while preserving every original drawing. */
+.camera-intro.archive-logo-intro{animation-duration:20.1s!important}
+.camera-intro.archive-logo-intro .intro-logo-camera{animation-duration:19.75s!important}
+.camera-intro.archive-logo-intro .intro-western{animation:intro-story-western-v93 5.5s .65s steps(1,end) both!important}
+.camera-intro.archive-logo-intro .intro-samurai{animation:intro-story-samurai-v93 5.5s 6.15s steps(1,end) both!important}
+.camera-intro.archive-logo-intro .intro-knight{animation:intro-story-knight-v93 7.5s 11.65s steps(1,end) both!important}
+.camera-intro.archive-logo-intro .western-rig.sequence-rig{animation:rig-show .08s .65s both}
+.camera-intro.archive-logo-intro .samurai-rig.sequence-rig{animation:rig-show .08s 6.15s both}
+.camera-intro.archive-logo-intro .knight-rig.sequence-rig{animation:rig-show .08s 11.65s both}
+.camera-intro.archive-logo-intro .intro-western .scene-pencil{animation:intro-original-off 0s .65s step-end forwards!important}
+.camera-intro.archive-logo-intro .intro-samurai .scene-pencil{animation:intro-original-off 0s 6.15s step-end forwards!important}
+.camera-intro.archive-logo-intro .intro-knight .scene-pencil{animation:intro-original-off 0s 11.65s step-end forwards!important}
+.camera-intro.archive-logo-intro .character-focus{position:absolute;z-index:6;inset:-12%;pointer-events:none;opacity:.38;background:radial-gradient(ellipse 34% 78% at var(--focus-x,50%) 58%,transparent 0 42%,rgba(12,9,7,.06) 68%,rgba(12,9,7,.18) 100%);transition:background 84ms linear;mix-blend-mode:multiply}
+.camera-intro.archive-logo-intro [data-phase="fire"] .character-focus,.camera-intro.archive-logo-intro [data-phase="first-clash"] .character-focus{opacity:.12}
+.camera-intro.archive-logo-intro [data-phase="aftermath"] .character-focus,.camera-intro.archive-logo-intro [data-phase="respect"] .character-focus,.camera-intro.archive-logo-intro [data-phase="homecoming"] .character-focus{opacity:.22}
+@keyframes intro-story-western-v93{0%,99.8%{opacity:1}100%{opacity:0}}
+@keyframes intro-story-samurai-v93{0%,99.8%{opacity:1}100%{opacity:0}}
+@keyframes intro-story-knight-v93{0%,93%{opacity:1}100%{opacity:0}}
+
+/* v94: twelve real drawings per story; one clean frame at a time. */
+.camera-intro.archive-logo-intro{animation-duration:15.25s!important}
+.camera-intro.archive-logo-intro .intro-logo-camera{animation-duration:14.9s!important}
+.camera-intro.archive-logo-intro .intro-western{animation:intro-story-western-v94 4.2s .65s steps(1,end) both!important}
+.camera-intro.archive-logo-intro .intro-samurai{animation:intro-story-samurai-v94 4.2s 4.85s steps(1,end) both!important}
+.camera-intro.archive-logo-intro .intro-knight{animation:intro-story-knight-v94 5.5s 9.05s steps(1,end) both!important}
+.camera-intro.archive-logo-intro .western-rig.sequence-rig{animation:rig-show .08s .65s both}
+.camera-intro.archive-logo-intro .samurai-rig.sequence-rig{animation:rig-show .08s 4.85s both}
+.camera-intro.archive-logo-intro .knight-rig.sequence-rig{animation:rig-show .08s 9.05s both}
+.camera-intro.archive-logo-intro .intro-western .scene-pencil{animation:intro-original-off 0s .65s step-end forwards!important}
+.camera-intro.archive-logo-intro .intro-samurai .scene-pencil{animation:intro-original-off 0s 4.85s step-end forwards!important}
+.camera-intro.archive-logo-intro .intro-knight .scene-pencil{animation:intro-original-off 0s 9.05s step-end forwards!important}
+.camera-intro.archive-logo-intro .character-focus{display:none!important}
+.camera-intro.archive-logo-intro .sequence-rig .scene-sequence-frame{visibility:hidden!important;opacity:0!important;transform:none!important;transition:none!important;filter:sepia(.06) contrast(1.08)!important;object-fit:contain}
+.camera-intro.archive-logo-intro .sequence-rig .scene-sequence-frame.is-current{visibility:visible!important;opacity:1!important}
+.camera-intro.archive-logo-intro .sequence-rig .scene-sequence-frame.is-incoming{visibility:hidden!important;opacity:0!important}
+.camera-intro.archive-logo-intro .western-rig .scene-sequence-frame{transform:scale(1.08)!important}
+.camera-intro.archive-logo-intro .samurai-rig .scene-sequence-frame{transform:scale(1.1)!important}
+.camera-intro.archive-logo-intro .knight-rig .scene-sequence-frame{transform:scale(1.06)!important}
+@keyframes intro-story-western-v94{0%,99.8%{opacity:1}100%{opacity:0}}
+@keyframes intro-story-samurai-v94{0%,99.8%{opacity:1}100%{opacity:0}}
+@keyframes intro-story-knight-v94{0%,93%{opacity:1}100%{opacity:0}}
+
+/* v95: establish the handmade camera, then move close enough to read its film. */
+.camera-intro.archive-logo-intro .intro-logo-camera{transform-origin:50.64% 49.05%;animation:intro-camera-screen-v95 14.9s cubic-bezier(.55,0,.18,1) both!important}
+.camera-intro.archive-logo-intro .sequence-rig .scene-sequence-frame{transform:translate3d(var(--pose-x,0),var(--pose-y,0),0) scale(var(--pose-scale,1))!important}
+@keyframes intro-camera-screen-v95{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.97);filter:blur(6px)}
+  4%{opacity:1;transform:translate(-50%,-50%) scale(1);filter:none}
+  11%,89%{opacity:1;transform:translate(-50%,-50%) scale(2.8);filter:none}
+  95%{opacity:1;transform:translate(-50%,-50%) scale(1);filter:none}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1.02)}
+}
+@media(max-width:900px){.camera-intro.archive-logo-intro .intro-logo-camera{animation-name:intro-camera-screen-mobile-v95!important}@keyframes intro-camera-screen-mobile-v95{0%{opacity:0;transform:translate(-50%,-50%) scale(.97);filter:blur(5px)}5%{opacity:1;transform:translate(-50%,-50%) scale(1);filter:none}12%,89%{opacity:1;transform:translate(-50%,-50%) scale(2.25);filter:none}95%{opacity:1;transform:translate(-50%,-50%) scale(1);filter:none}100%{opacity:0;transform:translate(-50%,-50%) scale(1.02)}}}
+
+/* v101: keep the painted mountain as a quiet setting instead of letting it swallow the actors. */
+.camera-intro.archive-logo-intro .intro-picture{background:transparent!important;box-shadow:inset 0 0 0 1px rgba(49,39,29,.12)}
+
+/* v103: the title card is the ending, never an overlay on the three films. */
+.camera-intro.archive-logo-intro .intro-wordmark-art{animation:intro-wordmark-end-v103 1.15s 13.55s cubic-bezier(.22,1,.36,1) both!important}
+@keyframes intro-wordmark-end-v103{0%,8%{opacity:0;transform:translate3d(0,5px,0) scale(.995)}55%{opacity:.72}100%{opacity:1;transform:translate3d(0,0,0) scale(1)}}
+.has-camera-intro .loader{display:none!important}
+.camera-intro.archive-logo-intro .intro-western,
+.camera-intro.archive-logo-intro .intro-samurai,
+.camera-intro.archive-logo-intro .intro-knight{animation-fill-mode:forwards!important}
+
+/* v106: hold the completed title card cleanly, then make one short exit. */
+.camera-intro.archive-logo-intro .intro-logo-camera{animation-name:intro-camera-screen-v106!important}
+@keyframes intro-camera-screen-v106{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.97);filter:blur(6px)}
+  4%{opacity:1;transform:translate(-50%,-50%) scale(1);filter:none}
+  11%,89%{opacity:1;transform:translate(-50%,-50%) scale(2.8);filter:none}
+  95%,98%{opacity:1;transform:translate(-50%,-50%) scale(1);filter:none}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1.02)}
+}
+@keyframes archive-intro-exit{0%,97%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
+@media(max-width:900px){.camera-intro.archive-logo-intro .intro-logo-camera{animation-name:intro-camera-screen-mobile-v106!important}@keyframes intro-camera-screen-mobile-v106{0%{opacity:0;transform:translate(-50%,-50%) scale(.97);filter:blur(5px)}5%{opacity:1;transform:translate(-50%,-50%) scale(1);filter:none}12%,89%{opacity:1;transform:translate(-50%,-50%) scale(2.25);filter:none}95%,98%{opacity:1;transform:translate(-50%,-50%) scale(1);filter:none}100%{opacity:0;transform:translate(-50%,-50%) scale(1.02)}}}
+
+/* v111: let the new coherent drawings fill the film gate without clipping them. */
+.camera-intro.archive-logo-intro .western-rig{--pose-scale:1.08}
+.camera-intro.archive-logo-intro .samurai-rig{--pose-scale:1.1;--pose-y:10%}
+.camera-intro.archive-logo-intro .knight-rig{--pose-scale:1.06}
+
+/* v115: ground the duel effects against the fallen samurai instead of the frame edge. */
+.camera-intro.archive-logo-intro .blood-samurai{left:65%;top:45%}
+.camera-intro.archive-logo-intro .blood-pool-samurai{left:52%;bottom:17%;width:38%;height:4.5%}
+
+/* v116: place the western effects on the drawn wound and body. */
+.camera-intro.archive-logo-intro .blood-western{left:74%;top:43%}
+.camera-intro.archive-logo-intro .blood-pool-western{left:52%;right:auto;bottom:11%;width:40%;height:4.5%}
+
+/* v117: paint in only the opening film and paint out only the closing film. */
+.camera-intro.archive-logo-intro .western-rig .scene-sequence-frame{
+  animation:story-ink-reveal .82s .65s steps(8,end) both!important
+}
+.camera-intro.archive-logo-intro .knight-rig .scene-sequence-frame{
+  animation:story-ink-reveal .92s 13.55s steps(8,end) reverse both!important
+}

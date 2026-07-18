@@ -6,8 +6,7 @@
 const current = location.pathname.split('/').pop() || 'index.html';
 const deployment = 'portfolio-2026-v34';
 const siteContent = window.PORTFOLIO_CONTENT || {};
-const introWasSeen = (() => { try { return localStorage.getItem('archive-intro-seen') === '1'; } catch { return false; } })();
-const showArchiveIntro = current === 'index.html' && siteContent.introEnabled !== false && !introWasSeen;
+const showArchiveIntro = current === 'index.html' && siteContent.introEnabled !== false;
 const escapeMarkup = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
 const safeExternalHref = value => { try { const url = new URL(value); return url.protocol === 'https:' ? url.href : '#'; } catch { return '#'; } };
 document.documentElement.style.overflowX = 'hidden';
@@ -21,13 +20,179 @@ if (current === 'blog.html') document.body.classList.add('journal-page');
 document.body.insertAdjacentHTML('afterbegin', `
   <div class="loader" aria-hidden="true"><div><span>The Archive</span><i></i><small>Film · Photo · Story</small></div></div>
   <div class="grain" aria-hidden="true"></div>
-  <header class="site-header"><a class="brand" href="index.html"><span class="brand-logo-wrap" aria-hidden="true"><img class="brand-logo" src="media/website-logo-transparent-shadow-v30.png" alt=""><i class="brand-spool brand-spool-left"><img src="media/website-logo-transparent-shadow-v30.png" alt=""></i><i class="brand-spool brand-spool-right"><img src="media/website-logo-transparent-shadow-v30.png" alt=""></i></span><span>The Archive</span></a>
+  <header class="site-header"><a class="brand" href="index.html"><span class="brand-logo-wrap" aria-hidden="true"><img class="brand-logo" src="media/website-camera-feed-v56.png" alt=""><i class="brand-spool brand-spool-left"><img src="media/website-camera-feed-v56.png" alt=""></i><i class="brand-spool brand-spool-right"><img src="media/website-camera-feed-v56.png" alt=""></i></span><span>The Archive</span></a>
     <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span><b>Menu</b></button>
     <nav id="main-nav">${pages.map(([name, url]) => `<a ${current === url ? 'class="active"' : ''} href="${url}">${name}</a>`).join('')}</nav>
   </header>
   <div class="nav-blur-field" aria-hidden="true"></div>
-  ${showArchiveIntro ? `<div class="camera-intro archive-logo-intro" aria-hidden="true"><div class="intro-paper"></div><div class="intro-logo-camera"><img class="intro-camera-mark" src="media/website-logo-transparent-shadow-v30.png" alt=""><i class="intro-spool intro-spool-left"><img src="media/website-logo-transparent-shadow-v30.png" alt=""></i><i class="intro-spool intro-spool-right"><img src="media/website-logo-transparent-shadow-v30.png" alt=""></i><div class="intro-picture"><figure class="intro-scene intro-western"><img class="scene-pencil" src="media/intro-western-v34.webp" alt=""></figure><figure class="intro-scene intro-samurai"><img class="scene-pencil" src="media/intro-samurai-v34.webp" alt=""></figure><figure class="intro-scene intro-knight"><img class="scene-pencil" src="media/intro-knight-v34.webp" alt=""></figure><span class="intro-frame-grain"></span></div></div><p>THE ARCHIVE / CHRISTIAN O. REYES</p></div>` : ''}`);
-if (showArchiveIntro) { try { localStorage.setItem('archive-intro-seen', '1'); } catch {} }
+  ${showArchiveIntro ? `<div class="camera-intro archive-logo-intro"><div class="intro-paper"></div><div class="intro-logo-camera" aria-hidden="true"><img class="intro-camera-mark" src="media/archive-intro-clean-v56.png" alt=""><i class="intro-spool intro-spool-left"><img src="media/archive-intro-clean-v56.png" alt=""></i><i class="intro-spool intro-spool-right"><img src="media/archive-intro-clean-v56.png" alt=""></i><div class="intro-picture"><figure class="intro-scene intro-western"><img class="scene-pencil" loading="eager" fetchpriority="high" src="media/intro-western-v38.png" alt=""></figure><figure class="intro-scene intro-samurai"><img class="scene-pencil" loading="eager" fetchpriority="high" src="media/intro-samurai-v38.png" alt=""></figure><figure class="intro-scene intro-knight"><img class="scene-pencil" loading="eager" fetchpriority="high" src="media/intro-knight-v38.png" alt=""></figure><canvas class="intro-paint-canvas"></canvas><span class="intro-frame-grain"></span></div><img class="intro-wordmark-art" src="media/archive-wordmark-ink-v59.png" alt=""></div><button class="intro-sound" type="button" aria-label="Play intro with sound">Sound on</button><p>THE ARCHIVE / CHRISTIAN O. REYES</p></div>` : ''}`);
+if (showArchiveIntro) document.body.classList.add('has-camera-intro');
+
+const useCanvasPainting = false;
+if (useCanvasPainting && showArchiveIntro && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const picture = document.querySelector('.intro-picture');
+  const canvas = picture?.querySelector('.intro-paint-canvas');
+  const sources = [...(picture?.querySelectorAll('.scene-pencil') || [])];
+  if (canvas && sources.length) {
+    Promise.all(sources.map(source => source.complete ? Promise.resolve() : new Promise(resolve => { source.addEventListener('load', resolve, { once: true }); source.addEventListener('error', resolve, { once: true }); }))).then(async () => {
+      const images = await Promise.all(sources.map(source => createImageBitmap(source)));
+      const context = canvas.getContext('2d');
+      const mask = document.createElement('canvas');
+      const maskContext = mask.getContext('2d');
+      const pixelRatio = Math.min(devicePixelRatio || 1, 2);
+      const width = Math.max(180, Math.round(picture.clientWidth * pixelRatio));
+      const height = Math.max(90, Math.round(picture.clientHeight * pixelRatio));
+      canvas.width = mask.width = width; canvas.height = mask.height = height;
+      picture.classList.add('paint-mode');
+      let sceneIndex = -1; let paintedStrokes = 0; let finishingStrokes = 0; let seed = 1;
+      const random = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
+      const addBrushStroke = progress => {
+        const horizontal = random() > .28;
+        const x = width * (progress * .78 + random() * .22);
+        const y = height * (.05 + random() * .9);
+        const length = (horizontal ? width : height) * (.12 + random() * .34);
+        const thickness = height * (.035 + random() * .105);
+        maskContext.save(); maskContext.lineCap = 'round'; maskContext.lineJoin = 'round';
+        for (let bristle = 0; bristle < 3; bristle += 1) {
+          maskContext.beginPath(); maskContext.globalAlpha = .42 + random() * .42; maskContext.strokeStyle = '#fff'; maskContext.lineWidth = thickness * (.34 + random() * .55);
+          maskContext.moveTo(x + (random() - .5) * thickness, y + (random() - .5) * thickness);
+          if (horizontal) maskContext.quadraticCurveTo(x + length * .48, y + (random() - .5) * thickness * 1.8, x + length, y + (random() - .5) * thickness);
+          else maskContext.quadraticCurveTo(x + (random() - .5) * thickness * 1.8, y + length * .48, x + (random() - .5) * thickness, y + length);
+          maskContext.stroke();
+        }
+        maskContext.restore();
+      };
+      const addFinishingStroke = row => {
+        const rows = 15; const y = height * ((row + .5) / rows); const thickness = height / rows * 1.34;
+        maskContext.save(); maskContext.strokeStyle = '#fff'; maskContext.globalAlpha = 1; maskContext.lineWidth = thickness; maskContext.lineCap = 'round'; maskContext.beginPath();
+        maskContext.moveTo(-thickness, y + (random() - .5) * thickness * .18);
+        maskContext.quadraticCurveTo(width * .5, y + (random() - .5) * thickness * .55, width + thickness, y + (random() - .5) * thickness * .18);
+        maskContext.stroke(); maskContext.restore();
+      };
+      const render = (image, elapsed) => {
+        context.clearRect(0, 0, width, height);
+        const breathe = 1.035 - Math.min(elapsed / 3200, 1) * .025;
+        context.save(); context.translate(width / 2, height / 2); context.scale(breathe, breathe); context.translate(-width / 2, -height / 2); context.drawImage(image, 0, 0, width, height); context.restore();
+        context.globalCompositeOperation = 'destination-in'; context.drawImage(mask, 0, 0); context.globalCompositeOperation = 'source-over';
+      };
+      const started = performance.now();
+      const animatePaint = now => {
+        const total = now - started; const nextScene = Math.min(Math.floor(total / 3200), images.length - 1); const elapsed = total - nextScene * 3200;
+        if (nextScene !== sceneIndex) { sceneIndex = nextScene; paintedStrokes = 0; finishingStrokes = 0; seed = 9109 + sceneIndex * 7919; maskContext.clearRect(0, 0, width, height); }
+        const target = Math.min(58, Math.floor(Math.max(0, elapsed - 90) / 27));
+        while (paintedStrokes < target) { addBrushStroke(paintedStrokes / 58); paintedStrokes += 1; }
+        const finishingTarget = Math.min(15, Math.floor(Math.max(0, elapsed - 1750) / 48));
+        while (finishingStrokes < finishingTarget) { addFinishingStroke(finishingStrokes); finishingStrokes += 1; }
+        render(sources[sceneIndex], elapsed);
+        if (total < 9750) requestAnimationFrame(animatePaint);
+      };
+      requestAnimationFrame(animatePaint);
+    });
+  }
+}
+
+const introSoundButton = document.querySelector('.intro-sound');
+const archiveIntro = document.querySelector('.archive-logo-intro');
+const introFrameFiles = Object.fromEntries(['western', 'samurai', 'medieval'].map(story => [story, Array.from({ length: 16 }, (_, index) => `${story}-cinematic-frame-${index + 1}-v110.png`)]));
+const introFramesMarkup = story => introFrameFiles[story].map(file => `<img class="scene-sequence-frame" src="media/sprites/${file}" alt="">`).join('');
+const introSpriteRigs = {
+  '.intro-western': `<div class="sprite-rig sequence-rig western-rig">${introFramesMarkup('western')}<i class="blood-spray blood-western"></i><i class="blood-pool blood-pool-western"></i></div>`,
+  '.intro-samurai': `<div class="sprite-rig sequence-rig samurai-rig">${introFramesMarkup('samurai')}<i class="story-flash"></i><i class="blood-spray blood-samurai"></i><i class="blood-pool blood-pool-samurai"></i></div>`,
+  '.intro-knight': `<div class="sprite-rig sequence-rig knight-rig">${introFramesMarkup('medieval')}<i class="story-glow"></i></div>`
+};
+Object.entries(introSpriteRigs).forEach(([selector, markup]) => archiveIntro?.querySelector(selector)?.insertAdjacentHTML('beforeend', markup));
+if (archiveIntro) {
+  const stories = [
+    { selector: '.intro-western', start: 650, duration: 4200, holds: [10,5,5,5,5,5,5,5,4,4,4,4,5,7,10,18], impact: 49, dying: 61 },
+    { selector: '.intro-samurai', start: 4850, duration: 4200, holds: [10,5,5,5,5,5,5,4,4,4,4,4,5,7,10,19], impact: 56, dying: 65 },
+    { selector: '.intro-knight', start: 9050, duration: 5500, holds: [12,7,7,7,7,7,7,7,7,7,7,7,7,8,12,16], resolve: 89 }
+  ];
+  stories.forEach(({ selector, start }) => {
+    const still = archiveIntro.querySelector(`${selector} .scene-pencil`);
+    setTimeout(() => { if (still) still.style.setProperty('display', 'none', 'important'); }, start);
+  });
+  const introStartedAt = performance.now();
+  let lastAnimationTick = -1;
+  const animateIntroStories = now => {
+    const tick = Math.floor((now - introStartedAt) / (1000 / 24));
+    if (tick !== lastAnimationTick) {
+      lastAnimationTick = tick;
+      stories.forEach(story => {
+        const rig = archiveIntro.querySelector(`${story.selector} .sequence-rig`);
+        if (!rig) return;
+        const localTick = Math.floor(((now - introStartedAt) - story.start) / (1000 / 24));
+        const frames = [...rig.querySelectorAll('.scene-sequence-frame')];
+        const totalTicks = story.holds.reduce((sum, hold) => sum + hold, 0);
+        const clampedTick = Math.max(0, Math.min(localTick, totalTicks - 1));
+        let cursor = 0; let pose = 0;
+        story.holds.some((hold, index) => { cursor += hold; pose = index; return clampedTick < cursor; });
+        frames.forEach((frame, index) => {
+          const isCurrent = localTick >= 0 && index === pose;
+          frame.classList.toggle('is-current', isCurrent);
+          frame.classList.remove('is-incoming');
+          frame.style.removeProperty('--frame-opacity');
+          frame.style.removeProperty('--story-x');
+          frame.style.removeProperty('--story-y');
+          frame.style.removeProperty('--story-zoom');
+          frame.style.removeProperty('--story-rotate');
+        });
+        rig.classList.toggle('is-impact', Number.isFinite(story.impact) && localTick >= story.impact && localTick < story.impact + 4);
+        rig.classList.toggle('is-blood', Number.isFinite(story.impact) && localTick >= story.impact);
+        rig.classList.toggle('is-dying', Number.isFinite(story.dying) && localTick >= story.dying);
+        rig.classList.toggle('is-resolved', Number.isFinite(story.resolve) && localTick >= story.resolve);
+        rig.classList.toggle('story-ended', localTick >= totalTicks - 18);
+      });
+    }
+    if (now - introStartedAt < 15000) requestAnimationFrame(animateIntroStories);
+  };
+  archiveIntro.querySelectorAll('.scene-sequence-frame').forEach(frame => frame.classList.remove('is-current'));
+  requestAnimationFrame(animateIntroStories);
+}
+const startArchiveIntro = async () => {
+  if (introSoundButton.disabled) return;
+  archiveIntro?.classList.remove('intro-awaiting'); archiveIntro?.classList.add('sound-started');
+  introSoundButton.disabled = true; introSoundButton.textContent = 'Sound playing';
+  const clips = {
+    projector: new Audio('media/audio/intro-projector.mp3'),
+    whip: new Audio('media/audio/intro-whip.mp3'),
+    western: new Audio('media/audio/intro-gunshot.mp3'),
+    samurai: new Audio('media/audio/intro-swords.mp3'),
+    swordMetal: new Audio('media/audio/intro-sword-metal.mp3'),
+    warCryOne: new Audio('media/audio/intro-warcry-one.mp3'),
+    warCryTwo: new Audio('media/audio/intro-warcry-two.mp3'),
+    medieval: new Audio('media/audio/intro-birds.mp3'),
+    westernTheme: new Audio('media/audio/theme-western.mp3'),
+    samuraiTheme: new Audio('media/audio/theme-samurai.mp3'),
+    medievalTheme: new Audio('media/audio/theme-medieval.mp3')
+  };
+  clips.projector.volume = .09; clips.whip.volume = .1; clips.western.volume = .08; clips.samurai.volume = .18; clips.swordMetal.volume = .14; clips.warCryOne.volume = .075; clips.warCryTwo.volume = .065; clips.medieval.volume = .12;
+  clips.westernTheme.volume = 0; clips.samuraiTheme.volume = 0; clips.medievalTheme.volume = 0;
+  Object.values(clips).forEach(clip => { clip.preload = 'auto'; clip.load(); });
+  const playClip = (clip, offset = 0) => { clip.currentTime = offset; clip.play().catch(() => {}); };
+  const fadeClip = (clip, target, duration = 420) => { const from = clip.volume; const began = performance.now(); const step = now => { const progress = Math.min((now - began) / duration, 1); clip.volume = from + (target - from) * (progress * progress * (3 - 2 * progress)); if (progress < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); };
+  playClip(clips.projector);
+  playClip(clips.westernTheme, 12); playClip(clips.samuraiTheme, 0); playClip(clips.medievalTheme, 0);
+  fadeClip(clips.westernTheme, .055, 380);
+  setTimeout(() => playClip(clips.warCryOne), 2200);
+  setTimeout(() => {
+    playClip(clips.western);
+    setTimeout(() => clips.western.pause(), 260);
+  }, 2690);
+  setTimeout(() => fadeClip(clips.westernTheme, 0, 520), 4450);
+  setTimeout(() => fadeClip(clips.samuraiTheme, .13, 520), 4650);
+  setTimeout(() => { clips.western.pause(); }, 4820);
+  setTimeout(() => playClip(clips.warCryTwo), 5850);
+  setTimeout(() => { playClip(clips.samurai); playClip(clips.swordMetal); }, 6650);
+  setTimeout(() => { playClip(clips.samurai); setTimeout(() => playClip(clips.swordMetal), 90); }, 7180);
+  setTimeout(() => fadeClip(clips.samuraiTheme, 0, 540), 8650);
+  setTimeout(() => fadeClip(clips.medievalTheme, .06, 540), 8850);
+  setTimeout(() => playClip(clips.medieval), 9050);
+  setTimeout(() => fadeClip(clips.medieval, 0, 950), 13750);
+  setTimeout(() => fadeClip(clips.medievalTheme, 0, 1050), 13800);
+  setTimeout(() => fadeClip(clips.projector, 0, 850), 14100);
+  setTimeout(() => { clips.projector.pause(); clips.medieval.pause(); clips.westernTheme.pause(); clips.samuraiTheme.pause(); clips.medievalTheme.pause(); introSoundButton.textContent = 'Sound played'; }, 15000);
+};
+if (archiveIntro) startArchiveIntro();
 
 const menu = document.querySelector('.menu-toggle');
 const nav = document.querySelector('#main-nav');
@@ -256,7 +421,7 @@ const replayReveals = () => {
 };
 addEventListener('pageshow', replayReveals);
 document.querySelectorAll('.hero-birds i').forEach((bird,index) => {
-  const landingSets = index ? [[[.24,.366],[.12,.378]],[[.72,.410],[.58,.416]],[[.93,.463],[.88,.430]],[[.27,.284],[.18,.293]]] : [[[.12,.378],[.24,.366]],[[.58,.416],[.72,.410]],[[.88,.430],[.93,.463]],[[.18,.293],[.27,.284]]];
+  const landingSets = index ? [[[.25,.417],[.25,.417]],[[.34,.404],[.34,.404]]] : [[[.84,.439],[.84,.439]],[[.74,.455],[.74,.455]]];
   const hero = document.querySelector('.hero'); const image = hero?.querySelector(':scope > img:not(.hero-foreground)'); const origin = document.querySelector('.hero-birds');
   let cycle = Math.floor(Math.random()*landingSets.length);
   const setLanding = () => {
@@ -266,8 +431,17 @@ document.querySelectorAll('.hero-birds i').forEach((bird,index) => {
     const landX = offsetX + x * renderedWidth - originBounds.left; const landY = offsetY + y * renderedHeight - originBounds.top; const nextX = offsetX + hopX * renderedWidth - originBounds.left; const nextY = offsetY + hopY * renderedHeight - originBounds.top;
     bird.style.setProperty('--land-x',`${landX}px`); bird.style.setProperty('--land-y',`${landY}px`); bird.style.setProperty('--hop-x',`${nextX - landX}px`); bird.style.setProperty('--hop-y',`${nextY - landY}px`);
   };
-  setLanding(); if (!image?.complete) image?.addEventListener('load', setLanding, { once: true }); bird.addEventListener('animationiteration', setLanding);
-  addEventListener('resize', setLanding, { passive: true });
+  setLanding(); if (!image?.complete) image?.addEventListener('load', setLanding, { once: true });
+  // Mobile browser chrome changes viewport height as it hides and shows. Avoid
+  // rewriting live animation coordinates unless the viewport width changed.
+  let landingViewportWidth = innerWidth;
+  let landingResizeFrame = 0;
+  addEventListener('resize', () => {
+    if (Math.abs(innerWidth - landingViewportWidth) < 2) return;
+    landingViewportWidth = innerWidth;
+    cancelAnimationFrame(landingResizeFrame);
+    landingResizeFrame = requestAnimationFrame(setLanding);
+  }, { passive: true });
 });
 document.querySelectorAll('img:not(.hero img)').forEach(img => { img.loading = 'lazy'; img.decoding = 'async'; });
 
