@@ -666,3 +666,9 @@ body.loaded .hero-copy .hello{animation:hero-copy-arrive .85s .4s var(--ease) bo
 .camera-intro.archive-logo-intro .knight-rig .scene-sequence-frame{
   animation:story-ink-reveal .92s 13.55s steps(8,end) reverse both!important
 }
+
+/* v120: remove the silvery projector sweep; retain the film gate and grain throughout. */
+.camera-intro.archive-logo-intro .intro-picture:after{display:none!important;content:none!important;animation:none!important}
+.camera-intro.archive-logo-intro .intro-scene:after{display:none!important;content:none!important;animation:none!important}
+.camera-intro.archive-logo-intro .intro-frame-grain{display:block!important;z-index:9;opacity:.14!important;mix-blend-mode:multiply;animation:intro-grain 420ms steps(2,end) infinite!important}
+.camera-intro.archive-logo-intro .intro-picture{box-shadow:inset 0 0 0 1px rgba(49,39,29,.22)!important}

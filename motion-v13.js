@@ -93,7 +93,10 @@ if (useCanvasPainting && showArchiveIntro && !matchMedia('(prefers-reduced-motio
 
 const introSoundButton = document.querySelector('.intro-sound');
 const archiveIntro = document.querySelector('.archive-logo-intro');
-const introFrameFiles = Object.fromEntries(['western', 'samurai', 'medieval'].map(story => [story, Array.from({ length: 16 }, (_, index) => `${story}-cinematic-frame-${index + 1}-v110.png`)]));
+let beginIntroTimeline = () => {};
+const introFrameFiles = Object.fromEntries(['western', 'samurai', 'medieval'].map(story => [story, Array.from({ length: 16 }, (_, index) => `${story}-cinematic-frame-${index + 1}-v122.png`)]));
+introFrameFiles.medieval[1] = 'medieval-cinematic-frame-2-v125.png';
+introFrameFiles.medieval[2] = 'medieval-cinematic-frame-3-v125.png';
 const introFramesMarkup = story => introFrameFiles[story].map(file => `<img class="scene-sequence-frame" src="media/sprites/${file}" alt="">`).join('');
 const introSpriteRigs = {
   '.intro-western': `<div class="sprite-rig sequence-rig western-rig">${introFramesMarkup('western')}<i class="blood-spray blood-western"></i><i class="blood-pool blood-pool-western"></i></div>`,
@@ -105,53 +108,61 @@ if (archiveIntro) {
   const stories = [
     { selector: '.intro-western', start: 650, duration: 4200, holds: [10,5,5,5,5,5,5,5,4,4,4,4,5,7,10,18], impact: 49, dying: 61 },
     { selector: '.intro-samurai', start: 4850, duration: 4200, holds: [10,5,5,5,5,5,5,4,4,4,4,4,5,7,10,19], impact: 56, dying: 65 },
-    { selector: '.intro-knight', start: 9050, duration: 5500, holds: [12,7,7,7,7,7,7,7,7,7,7,7,7,8,12,16], resolve: 89 }
+    { selector: '.intro-knight', start: 9050, duration: 5500, holds: [12,7,1,7,7,7,7,7,7,7,7,7,7,8,12,16], resolve: 89 }
   ];
-  stories.forEach(({ selector, start }) => {
-    const still = archiveIntro.querySelector(`${selector} .scene-pencil`);
-    setTimeout(() => { if (still) still.style.setProperty('display', 'none', 'important'); }, start);
-  });
-  const introStartedAt = performance.now();
-  let lastAnimationTick = -1;
-  const animateIntroStories = now => {
-    const tick = Math.floor((now - introStartedAt) / (1000 / 24));
-    if (tick !== lastAnimationTick) {
-      lastAnimationTick = tick;
-      stories.forEach(story => {
-        const rig = archiveIntro.querySelector(`${story.selector} .sequence-rig`);
-        if (!rig) return;
-        const localTick = Math.floor(((now - introStartedAt) - story.start) / (1000 / 24));
-        const frames = [...rig.querySelectorAll('.scene-sequence-frame')];
-        const totalTicks = story.holds.reduce((sum, hold) => sum + hold, 0);
-        const clampedTick = Math.max(0, Math.min(localTick, totalTicks - 1));
-        let cursor = 0; let pose = 0;
-        story.holds.some((hold, index) => { cursor += hold; pose = index; return clampedTick < cursor; });
-        frames.forEach((frame, index) => {
-          const isCurrent = localTick >= 0 && index === pose;
-          frame.classList.toggle('is-current', isCurrent);
-          frame.classList.remove('is-incoming');
-          frame.style.removeProperty('--frame-opacity');
-          frame.style.removeProperty('--story-x');
-          frame.style.removeProperty('--story-y');
-          frame.style.removeProperty('--story-zoom');
-          frame.style.removeProperty('--story-rotate');
+  let introTimelineStarted = false;
+  beginIntroTimeline = () => {
+    if (introTimelineStarted) return;
+    introTimelineStarted = true;
+    stories.forEach(({ selector, start }) => {
+      const still = archiveIntro.querySelector(`${selector} .scene-pencil`);
+      setTimeout(() => { if (still) still.style.setProperty('display', 'none', 'important'); }, start);
+    });
+    const introStartedAt = performance.now();
+    let lastAnimationTick = -1;
+    const animateIntroStories = now => {
+      const tick = Math.floor((now - introStartedAt) / (1000 / 24));
+      if (tick !== lastAnimationTick) {
+        lastAnimationTick = tick;
+        stories.forEach(story => {
+          const rig = archiveIntro.querySelector(`${story.selector} .sequence-rig`);
+          if (!rig) return;
+          const localTick = Math.floor(((now - introStartedAt) - story.start) / (1000 / 24));
+          const frames = [...rig.querySelectorAll('.scene-sequence-frame')];
+          const totalTicks = story.holds.reduce((sum, hold) => sum + hold, 0);
+          const clampedTick = Math.max(0, Math.min(localTick, totalTicks - 1));
+          let cursor = 0; let pose = 0;
+          story.holds.some((hold, index) => { cursor += hold; pose = index; return clampedTick < cursor; });
+          frames.forEach((frame, index) => {
+            const isCurrent = localTick >= 0 && index === pose;
+            frame.classList.toggle('is-current', isCurrent);
+            frame.classList.remove('is-incoming');
+            frame.style.removeProperty('--frame-opacity');
+            frame.style.removeProperty('--story-x');
+            frame.style.removeProperty('--story-y');
+            frame.style.removeProperty('--story-zoom');
+            frame.style.removeProperty('--story-rotate');
+          });
+          rig.classList.toggle('is-impact', Number.isFinite(story.impact) && localTick >= story.impact && localTick < story.impact + 4);
+          rig.classList.toggle('is-blood', Number.isFinite(story.impact) && localTick >= story.impact);
+          rig.classList.toggle('is-dying', Number.isFinite(story.dying) && localTick >= story.dying);
+          rig.classList.toggle('is-resolved', Number.isFinite(story.resolve) && localTick >= story.resolve);
+          rig.classList.toggle('story-ended', localTick >= totalTicks - 18);
         });
-        rig.classList.toggle('is-impact', Number.isFinite(story.impact) && localTick >= story.impact && localTick < story.impact + 4);
-        rig.classList.toggle('is-blood', Number.isFinite(story.impact) && localTick >= story.impact);
-        rig.classList.toggle('is-dying', Number.isFinite(story.dying) && localTick >= story.dying);
-        rig.classList.toggle('is-resolved', Number.isFinite(story.resolve) && localTick >= story.resolve);
-        rig.classList.toggle('story-ended', localTick >= totalTicks - 18);
-      });
-    }
-    if (now - introStartedAt < 15000) requestAnimationFrame(animateIntroStories);
+      }
+      if (now - introStartedAt < 15000) requestAnimationFrame(animateIntroStories);
+    };
+    requestAnimationFrame(animateIntroStories);
   };
   archiveIntro.querySelectorAll('.scene-sequence-frame').forEach(frame => frame.classList.remove('is-current'));
-  requestAnimationFrame(animateIntroStories);
 }
 const startArchiveIntro = async () => {
   if (introSoundButton.disabled) return;
   archiveIntro?.classList.remove('intro-awaiting'); archiveIntro?.classList.add('sound-started');
   introSoundButton.disabled = true; introSoundButton.textContent = 'Sound playing';
+  beginIntroTimeline();
+  const audioStartedAt = performance.now();
+  let playbackBlocked = false;
   const clips = {
     projector: new Audio('media/audio/intro-projector.mp3'),
     whip: new Audio('media/audio/intro-whip.mp3'),
@@ -168,10 +179,21 @@ const startArchiveIntro = async () => {
   clips.projector.volume = .09; clips.whip.volume = .1; clips.western.volume = .08; clips.samurai.volume = .18; clips.swordMetal.volume = .14; clips.warCryOne.volume = .075; clips.warCryTwo.volume = .065; clips.medieval.volume = .12;
   clips.westernTheme.volume = 0; clips.samuraiTheme.volume = 0; clips.medievalTheme.volume = 0;
   Object.values(clips).forEach(clip => { clip.preload = 'auto'; clip.load(); });
-  const playClip = (clip, offset = 0) => { clip.currentTime = offset; clip.play().catch(() => {}); };
+  const playClip = (clip, offset = 0) => { clip.currentTime = offset; clip.play().catch(() => { playbackBlocked = true; }); };
   const fadeClip = (clip, target, duration = 420) => { const from = clip.volume; const began = performance.now(); const step = now => { const progress = Math.min((now - began) / duration, 1); clip.volume = from + (target - from) * (progress * progress * (3 - 2 * progress)); if (progress < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); };
   playClip(clips.projector);
   playClip(clips.westernTheme, 12); playClip(clips.samuraiTheme, 0); playClip(clips.medievalTheme, 0);
+  if (matchMedia('(pointer: coarse)').matches || matchMedia('(max-width: 900px)').matches) {
+    document.addEventListener('pointerdown', () => {
+      if (!playbackBlocked) return;
+      const elapsed = Math.max(0, (performance.now() - audioStartedAt) / 1000);
+      [[clips.projector, elapsed], [clips.westernTheme, 12 + elapsed], [clips.samuraiTheme, elapsed], [clips.medievalTheme, elapsed]].forEach(([clip, position]) => {
+        try { clip.currentTime = position; } catch {}
+        clip.play().catch(() => {});
+      });
+      playbackBlocked = false;
+    }, { once: true, capture: true });
+  }
   fadeClip(clips.westernTheme, .055, 380);
   setTimeout(() => playClip(clips.warCryOne), 2200);
   setTimeout(() => {
@@ -192,7 +214,10 @@ const startArchiveIntro = async () => {
   setTimeout(() => fadeClip(clips.projector, 0, 850), 14100);
   setTimeout(() => { clips.projector.pause(); clips.medieval.pause(); clips.westernTheme.pause(); clips.samuraiTheme.pause(); clips.medievalTheme.pause(); introSoundButton.textContent = 'Sound played'; }, 15000);
 };
-if (archiveIntro) startArchiveIntro();
+if (archiveIntro) {
+  beginIntroTimeline();
+  startArchiveIntro();
+}
 
 const menu = document.querySelector('.menu-toggle');
 const nav = document.querySelector('#main-nav');
