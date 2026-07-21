@@ -165,10 +165,7 @@ const startArchiveIntro = async () => {
   let playbackBlocked = false;
   const clips = {
     projector: new Audio('media/audio/intro-projector.mp3'),
-    whip: new Audio('media/audio/intro-whip.mp3'),
     western: new Audio('media/audio/intro-gunshot.mp3'),
-    samurai: new Audio('media/audio/intro-swords.mp3'),
-    swordMetal: new Audio('media/audio/intro-sword-metal.mp3'),
     warCryOne: new Audio('media/audio/intro-warcry-one.mp3'),
     warCryTwo: new Audio('media/audio/intro-warcry-two.mp3'),
     medieval: new Audio('media/audio/intro-birds.mp3'),
@@ -176,7 +173,7 @@ const startArchiveIntro = async () => {
     samuraiTheme: new Audio('media/audio/theme-samurai.mp3'),
     medievalTheme: new Audio('media/audio/theme-medieval.mp3')
   };
-  clips.projector.volume = .09; clips.whip.volume = .1; clips.western.volume = .08; clips.samurai.volume = .18; clips.swordMetal.volume = .14; clips.warCryOne.volume = .075; clips.warCryTwo.volume = .065; clips.medieval.volume = .12;
+  clips.projector.volume = .09; clips.western.volume = .08; clips.warCryOne.volume = .075; clips.warCryTwo.volume = .065; clips.medieval.volume = .12;
   clips.westernTheme.volume = 0; clips.samuraiTheme.volume = 0; clips.medievalTheme.volume = 0;
   Object.values(clips).forEach(clip => { clip.preload = 'auto'; clip.load(); });
   const playClip = (clip, offset = 0) => { clip.currentTime = offset; clip.play().catch(() => { playbackBlocked = true; }); };
@@ -200,12 +197,13 @@ const startArchiveIntro = async () => {
     playClip(clips.western);
     setTimeout(() => clips.western.pause(), 260);
   }, 2690);
-  setTimeout(() => fadeClip(clips.westernTheme, 0, 520), 4450);
-  setTimeout(() => fadeClip(clips.samuraiTheme, .13, 520), 4650);
-  setTimeout(() => { clips.western.pause(); }, 4820);
+  setTimeout(() => fadeClip(clips.warCryOne, 0, 180), 3980);
+  setTimeout(() => fadeClip(clips.westernTheme, 0, 300), 4050);
+  setTimeout(() => fadeClip(clips.projector, 0, 180), 4140);
+  setTimeout(() => clips.warCryOne.pause(), 4220);
+  setTimeout(() => { try { clips.samuraiTheme.currentTime = 0; } catch {} }, 4920);
+  setTimeout(() => { fadeClip(clips.projector, .09, 260); fadeClip(clips.samuraiTheme, .13, 900); }, 5200);
   setTimeout(() => playClip(clips.warCryTwo), 5850);
-  setTimeout(() => { playClip(clips.samurai); playClip(clips.swordMetal); }, 6650);
-  setTimeout(() => { playClip(clips.samurai); setTimeout(() => playClip(clips.swordMetal), 90); }, 7180);
   setTimeout(() => fadeClip(clips.samuraiTheme, 0, 540), 8650);
   setTimeout(() => fadeClip(clips.medievalTheme, .06, 540), 8850);
   setTimeout(() => playClip(clips.medieval), 9050);
