@@ -93,6 +93,19 @@ if (useCanvasPainting && showArchiveIntro && !matchMedia('(prefers-reduced-motio
 
 const introSoundButton = document.querySelector('.intro-sound');
 const archiveIntro = document.querySelector('.archive-logo-intro');
+const previewManagedAudio = new Set();
+let previewAudioStopped = false;
+const stopPreviewMedia = () => {
+  previewAudioStopped = true;
+  previewManagedAudio.forEach(clip => clip.pause());
+  document.querySelectorAll('audio, video').forEach(media => media.pause());
+};
+addEventListener('message', event => {
+  if (event.origin === location.origin && event.data?.type === 'portfolio-preview-stop-media') stopPreviewMedia();
+});
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) stopPreviewMedia();
+});
 let beginIntroTimeline = () => {};
 const introFrameFiles = Object.fromEntries(['western', 'samurai', 'medieval'].map(story => [story, Array.from({ length: 16 }, (_, index) => `${story}-cinematic-frame-${index + 1}-v122.png`)]));
 introFrameFiles.medieval[1] = 'medieval-cinematic-frame-2-v125.png';
@@ -176,11 +189,12 @@ const startArchiveIntro = async () => {
     samuraiTheme: new Audio('media/audio/theme-samurai.mp3'),
     medievalTheme: new Audio('media/audio/theme-medieval.mp3')
   };
+  Object.values(clips).forEach(clip => previewManagedAudio.add(clip));
   clips.projector.volume = .09; clips.whip.volume = .1; clips.western.volume = .08; clips.samurai.volume = .18; clips.swordMetal.volume = .14; clips.warCryOne.volume = .075; clips.warCryTwo.volume = .065; clips.medieval.volume = .12;
   clips.westernTheme.volume = 0; clips.samuraiTheme.volume = 0; clips.medievalTheme.volume = 0;
   Object.values(clips).forEach(clip => { clip.preload = 'auto'; clip.load(); });
-  const playClip = (clip, offset = 0) => { clip.currentTime = offset; clip.play().catch(() => { playbackBlocked = true; }); };
-  const fadeClip = (clip, target, duration = 420) => { const from = clip.volume; const began = performance.now(); const step = now => { const progress = Math.min((now - began) / duration, 1); clip.volume = from + (target - from) * (progress * progress * (3 - 2 * progress)); if (progress < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); };
+  const playClip = (clip, offset = 0) => { if (previewAudioStopped) return; clip.currentTime = offset; clip.play().catch(() => { playbackBlocked = true; }); };
+  const fadeClip = (clip, target, duration = 420) => { if (previewAudioStopped) return; const from = clip.volume; const began = performance.now(); const step = now => { if (previewAudioStopped) return; const progress = Math.min((now - began) / duration, 1); clip.volume = from + (target - from) * (progress * progress * (3 - 2 * progress)); if (progress < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); };
   playClip(clips.projector);
   playClip(clips.westernTheme, 12); playClip(clips.samuraiTheme, 0); playClip(clips.medievalTheme, 0);
   if (matchMedia('(pointer: coarse)').matches || matchMedia('(max-width: 900px)').matches) {
